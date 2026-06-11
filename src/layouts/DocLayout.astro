@@ -1,11 +1,15 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
 
 const { frontmatter, headerConfig = {} } = Astro.props
 const isRoot = Astro.url.pathname === '/'
-const { showCopy, showDownload, backUrl = isRoot ? undefined : '../' } =
-  headerConfig
+const {
+  showCopy,
+  showDownload,
+  backUrl = isRoot ? undefined : '../',
+} = headerConfig
 ---
 
 <Layout title={frontmatter?.title} simpleTitle={frontmatter?.simpleTitle}>
@@ -22,4 +26,5 @@ const { showCopy, showDownload, backUrl = isRoot ? undefined : '../' } =
   <div class="blocks">
     <slot />
   </div>
+  <Footer />
 </Layout>

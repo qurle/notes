@@ -35,10 +35,6 @@ console.debug(`Current path: ${currentPath}`)
 const currentFolder = currentPath.split('/').slice(0, -1).pop()
 console.debug(`Current folder: ${currentFolder}`)
 
-const resolvedBack = folder ? currentPath.replace(`/${currentFolder}/`, '').replace('.', '') : null
-const backPath = folder ? (resolvedBack || '/') : null
-console.debug(`Back path: ${backPath}`)
-
 const contents = Object.keys(
   import.meta.glob<Record<string, any>>([
         './*.{astro,html,mdx,md}',    // Root folder
@@ -78,7 +74,7 @@ console.debug(`Pages:`)
 console.debug(pages)
 ---
 
-<DocLayout headerConfig = {{backUrl: backPath}}>
+<DocLayout>
   <h1>{folder ? currentFolder: 'home'}/</h1>
   { folders.length > 0 && <ul class="folders">
     {

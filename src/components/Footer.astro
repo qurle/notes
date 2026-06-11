@@ -1,0 +1,23 @@
+---
+import '@styles/header.sass'
+import { Icon } from 'astro-icon/components'
+
+const { text = 'qurle', link = 'https://qurle.net' } = Astro.props
+---
+
+<footer>
+  <a href={link} target="_blank">{text}</a>
+</footer>
+<style>
+  footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block-start: var(--space-3xl);
+
+    a {
+      color: var(--color-main-25);
+    }
+  }
+</style>
