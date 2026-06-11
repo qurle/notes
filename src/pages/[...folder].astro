@@ -5,16 +5,19 @@ import { unique } from '@scripts/utils/unique'
 export function getStaticPaths() {
   const folders = unique(
     Object.keys(
-      import.meta.glob<Record<string, any>>([
-        './*.{astro,html,mdx,md}',
-        './**/*.{astro,html,mdx,md}',
-      ], { eager: true, query: '?url' }),
+      import.meta.glob<Record<string, any>>(
+        ['./*.{astro,html,mdx,md}', './**/*.{astro,html,mdx,md}'],
+        { eager: true, query: '?url' },
+      ),
     )
       .filter((path) => path.split('/').length > 2)
       .map((path) => path.replace(/^\.\/|\/[^\/]*$/g, '')),
   )
 
-  return [...folders.map((folder) => ({ params: { folder } })), { params: { folder: '' } }]
+  return [
+    ...folders.map((folder) => ({ params: { folder } })),
+    { params: { folder: '' } },
+  ]
 }
 
 const { folder } = Astro.params
@@ -22,10 +25,10 @@ const currentPath = folder ? `./${folder}/` : './'
 const currentFolder = folder?.split('/').at(-1)
 
 const allFiles = Object.keys(
-  import.meta.glob<Record<string, any>>([
-    './*.{astro,html,mdx,md}',
-    './**/*.{astro,html,mdx,md}',
-  ], { eager: true, query: '?url' }),
+  import.meta.glob<Record<string, any>>(
+    ['./*.{astro,html,mdx,md}', './**/*.{astro,html,mdx,md}'],
+    { eager: true, query: '?url' },
+  ),
 )
 
 const contents = allFiles.filter((path) => path.startsWith(currentPath))
@@ -33,7 +36,9 @@ const contents = allFiles.filter((path) => path.startsWith(currentPath))
 const folders = unique(
   contents
     .filter((path) => path.replace(currentPath, '').split('/').length === 2)
-    .map((path) => path.substring(0, path.lastIndexOf('/')).replace(currentPath, '')),
+    .map((path) =>
+      path.substring(0, path.lastIndexOf('/')).replace(currentPath, ''),
+    ),
 )
 
 const pages = contents
@@ -46,21 +51,27 @@ const pages = contents
 
 <DocLayout>
   <h1>{folder ? currentFolder : 'home'}/</h1>
-  {folders.length > 0 && <ul class="folders">
-    {folders.map((path) => (
-      <li><a href={path}>{path.split('/').at(-1)}/</a></li>
-    ))}
+  <ul class="entries">
+    {
+      folders.map((path) => (
+        <li class="folder">
+          <a href={path}>{path.split('/').at(-1)}/</a>
+        </li>
+      ))
+    }
+    {folders.length > 0 && pages.length > 0 && <hr />}
+    {
+      pages.map(({ href, name }) => (
+        <li>
+          <a href={href}>{name}</a>
+        </li>
+      ))
+    }
   </ul>
-  <hr />}
-  {pages.length > 0 && <ul class="pages">
-    {pages.map(({ href, name }) => (
-      <li><a href={href}>{name}</a></li>
-    ))}
-  </ul>}
 </DocLayout>
 <script>
   const links = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>('.folders a, .pages a')
+    document.querySelectorAll<HTMLAnchorElement>('.entries a'),
   )
 
   document.addEventListener('keydown', (e) => {
@@ -68,9 +79,14 @@ const pages = contents
     e.preventDefault()
 
     const idx = links.indexOf(document.activeElement as HTMLAnchorElement)
-    const next = e.key === 'ArrowDown'
-      ? (idx === -1 ? 0 : (idx + 1) % links.length)
-      : (idx === -1 ? links.length - 1 : (idx - 1 + links.length) % links.length)
+    const next =
+      e.key === 'ArrowDown'
+        ? idx === -1
+          ? 0
+          : (idx + 1) % links.length
+        : idx === -1
+          ? links.length - 1
+          : (idx - 1 + links.length) % links.length
     links[next].focus()
   })
 </script>

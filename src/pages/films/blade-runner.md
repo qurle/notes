@@ -5,7 +5,7 @@ title: Blade Runner
 
 # Blade Runner
 
-![Blade Runner 1982](https://upload.wikimedia.org/wikipedia/en/9/9f/Blade_Runner_%281982_film%29.png)
+![Blade Runner 1982](https://upload.wikimedia.org/wikipedia/en/9/9f/Blade_Runner_%281982_poster%29.png)
 
 Directed by Ridley Scott, 1982. Based on Philip K. Dick's *Do Androids Dream of Electric Sheep?* (1968). Neo-noir science fiction set in Los Angeles, November 2019. Shot by Jordan Cronenweth. Music by Vangelis.
 
