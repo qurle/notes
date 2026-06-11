@@ -1,53 +1,34 @@
 ---
 import DocLayout from '@layouts/DocLayout.astro'
 import { unique } from '@scripts/utils/unique'
-import { undefined } from 'astro:schema'
 
 export function getStaticPaths() {
-  console.debug('Got folder')
   const folders = unique(
     Object.keys(
       import.meta.glob<Record<string, any>>([
-        './*.{astro,html,mdx,md}',    // Root folder
-        './**/*.{astro,html,mdx,md}', // Other folders
-      ], 
-      {
-        eager: true,
-        query: '?url',
-      }),
+        './*.{astro,html,mdx,md}',
+        './**/*.{astro,html,mdx,md}',
+      ], { eager: true, query: '?url' }),
     )
       .filter((path) => path.split('/').length > 2)
       .map((path) => path.replace(/^\.\/|\/[^\/]*$/g, '')),
   )
 
-  return [...folders.map(
-    (folder) => ({ params: { folder } })
-  ), { params: { folder: '' } }]
+  return [...folders.map((folder) => ({ params: { folder } })), { params: { folder: '' } }]
 }
 
 const { folder } = Astro.params
-
-console.debug(`Resolved folder: ${folder}`)
-
 const currentPath = folder ? `./${folder}/` : './'
-console.debug(`Current path: ${currentPath}`)
+const currentFolder = folder?.split('/').at(-1)
 
-const currentFolder = currentPath.split('/').slice(0, -1).pop()
-console.debug(`Current folder: ${currentFolder}`)
-
-const contents = Object.keys(
+const allFiles = Object.keys(
   import.meta.glob<Record<string, any>>([
-        './*.{astro,html,mdx,md}',    // Root folder
-        './**/*.{astro,html,mdx,md}', // Other folders
-      ], 
-      {
-        eager: true,
-        query: '?url',
-  }),
-).filter((path) => path.startsWith(currentPath))
+    './*.{astro,html,mdx,md}',
+    './**/*.{astro,html,mdx,md}',
+  ], { eager: true, query: '?url' }),
+)
 
-console.debug(`Contents:`)
-console.debug(contents)
+const contents = allFiles.filter((path) => path.startsWith(currentPath))
 
 const folders = unique(
   contents
@@ -55,46 +36,41 @@ const folders = unique(
     .map((path) => path.substring(0, path.lastIndexOf('/')).replace(currentPath, '')),
 )
 
-console.debug(contents)
-console.debug(contents.map(path => path.replace(currentPath, '')))
-
-console.debug(`Folders:`)
-console.debug(folders)
-
-const pages = Object.keys(
-  import.meta.glob<Record<string, any>>('./**/*.{astro,html,mdx,md}', {
-    eager: true,
-    query: '?url',
-  }),
-)
+const pages = contents
   .filter((path) => path.replace(currentPath, '').split('/').length === 1)
-  .map((path) => path.replace(/^\.(.+)\.[^.]+$/, '$1'))
-
-console.debug(`Pages:`)
-console.debug(pages)
+  .map((path) => ({
+    href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
+    name: path.split('/').at(-1),
+  }))
 ---
 
 <DocLayout>
-  <h1>{folder ? currentFolder: 'home'}/</h1>
-  { folders.length > 0 && <ul class="folders">
-    {
-      folders.map((path) => (
-        <li>
-          <a href={path}>{path.split('/').at(-1)}/</a>
-        </li>
-      ))
-    }
+  <h1>{folder ? currentFolder : 'home'}/</h1>
+  {folders.length > 0 && <ul class="folders">
+    {folders.map((path) => (
+      <li><a href={path}>{path.split('/').at(-1)}/</a></li>
+    ))}
   </ul>
   <hr />}
-  {
-  pages.length > 0 &&<ul class="pages">
-    {
-      pages.map((path) => (
-        <li>
-          <a href={path}>{path.split('/').at(-1)}</a>
-        </li>
-      ))
-    }
-  </ul>
-  }
+  {pages.length > 0 && <ul class="pages">
+    {pages.map(({ href, name }) => (
+      <li><a href={href}>{name}</a></li>
+    ))}
+  </ul>}
 </DocLayout>
+<script>
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.folders a, .pages a')
+  )
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    e.preventDefault()
+
+    const idx = links.indexOf(document.activeElement as HTMLAnchorElement)
+    const next = e.key === 'ArrowDown'
+      ? (idx === -1 ? 0 : (idx + 1) % links.length)
+      : (idx === -1 ? links.length - 1 : (idx - 1 + links.length) % links.length)
+    links[next].focus()
+  })
+</script>

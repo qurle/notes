@@ -46,7 +46,12 @@ const { hideBack, backUrl, showCopy, showDownload } = Astro.props
 
   const fontEl = getByClass('fonts')
   const themeEl = getByClass('theme')
+  const backEl = getByClass('back')
 
   fontEl.addEventListener('click', cycleFonts)
   themeEl.addEventListener('click', cycleThemes)
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyB') backEl?.click()
+  })
 </script>

@@ -9,8 +9,12 @@
         #shortcuts-list samp
             display: inline-flex
 
-    button
+    button, a
         cursor: pointer
+        &:focus-visible::before
+            opacity: 1
+            background: transparent
+            border: 1px solid var(--color-main-50)
 
     kbd
         min-width: 1.25rem
@@ -90,6 +94,9 @@
                     transition: transform var(--transition-s)
                 &:hover::before
                     opacity: 1
+                &:focus-visible::before
+                    opacity: 1
+                    background: transparent
                 &:active::before
                     transform: scale(0.98)
             &::marker

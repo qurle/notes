@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bookshelf</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #e2e2e2;
+      --muted: #888;
+      --accent: #a78bfa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--muted); margin-bottom: 2.5rem; font-size: 0.9rem; }
+    .filter-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: none;
+      color: var(--muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .shelf { display: grid; gap: 1px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .book {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    .book:last-child { border-bottom: none; }
+    .book:hover { background: #1c1c1c; }
+    .book[data-status="queued"] { opacity: 0.6; }
+    .book-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.2rem; }
+    .book h3 { font-size: 1rem; font-weight: 600; }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .badge-done    { background: #14532d; color: #86efac; }
+    .badge-reading { background: #3b1b00; color: #fbbf24; }
+    .badge-queued  { background: #1f1f1f; color: #888; }
+    .author { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.6rem; }
+    .note { font-size: 0.9rem; color: #b0b0b0; line-height: 1.55; }
+    .tag { display: inline-block; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 3px; background: #222; color: #888; margin-right: 0.3rem; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Bookshelf</h1>
+  <p class="subtitle">Not a complete record. Things I've thought about.</p>
+
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filter('all', this)">All</button>
+    <button class="filter-btn" onclick="filter('done', this)">Read</button>
+    <button class="filter-btn" onclick="filter('reading', this)">Reading</button>
+    <button class="filter-btn" onclick="filter('queued', this)">Queued</button>
+  </div>
+
+  <div class="shelf" id="shelf">
+
+    <div class="book" data-status="done">
+      <div class="book-header">
+        <h3>The Dispossessed</h3>
+        <span class="badge badge-done">read</span>
+      </div>
+      <p class="author">Ursula K. Le Guin — 1974</p>
+      <span class="tag">sci-fi</span><span class="tag">politics</span>
+      <p class="note">Subtitled "An Ambiguous Utopia." Two worlds — one anarchist, one capitalist — and neither wins convincingly. Shevek's physics (Simultaneity theory) mirrors the book's structure: the past and present alternate in chapters that collapse into each other at the end. One of the few novels that actually made me reconsider how I think about property.</p>
+    </div>
+
+    <div class="book" data-status="done">
+      <div class="book-header">
+        <h3>Gödel, Escher, Bach</h3>
+        <span class="badge badge-done">read</span>
+      </div>
+      <p class="author">Douglas Hofstadter — 1979</p>
+      <span class="tag">maths</span><span class="tag">philosophy</span><span class="tag">AI</span>
+      <p class="note">About how self-reference gives rise to meaning and — maybe — consciousness. Every chapter begins with a dialogue between Achilles and the Tortoise that encodes the chapter's argument in its conversational structure. Took three months. Changed how I think about loops.</p>
+    </div>
+
+    <div class="book" data-status="done">
+      <div class="book-header">
+        <h3>Thinking, Fast and Slow</h3>
+        <span class="badge badge-done">read</span>
+      </div>
+      <p class="author">Daniel Kahneman — 2011</p>
+      <span class="tag">psychology</span>
+      <p class="note">System 1 (fast, intuitive, wrong in specific predictable ways) vs System 2 (slow, deliberate, easily fatigued). The anchoring effect alone explains about 40% of bad decisions I've witnessed in product meetings.</p>
+    </div>
+
+    <div class="book" data-status="done">
+      <div class="book-header">
+        <h3>Blood Meridian</h3>
+        <span class="badge badge-done">read</span>
+      </div>
+      <p class="author">Cormac McCarthy — 1985</p>
+      <span class="tag">fiction</span>
+      <p class="note">The Judge is the most terrifying character in American literature. The prose has no quotation marks, no chapter breaks, no mercy. Violence rendered without judgment or meaning — which turns out to be more disturbing than either condemnation or glorification. I put it down six times.</p>
+    </div>
+
+    <div class="book" data-status="reading">
+      <div class="book-header">
+        <h3>The Gene: An Intimate History</h3>
+        <span class="badge badge-reading">reading</span>
+      </div>
+      <p class="author">Siddhartha Mukherjee — 2016</p>
+      <span class="tag">science</span><span class="tag">biology</span>
+      <p class="note">From Mendel's peas to CRISPR in 500 pages. Dense but not dry. The chapter on the eugenics movement is essential reading for anyone currently excited about genomic editing tools without being anxious about them.</p>
+    </div>
+
+    <div class="book" data-status="queued">
+      <div class="book-header">
+        <h3>Anathem</h3>
+        <span class="badge badge-queued">queued</span>
+      </div>
+      <p class="author">Neal Stephenson — 2008</p>
+      <span class="tag">sci-fi</span><span class="tag">philosophy</span>
+      <p class="note">Mathematicians in monasteries on a planet that is not quite Earth. Apparently the first 150 pages are brutal world-building, and then it becomes one of the best science fiction novels ever written. I believe this. I've been "about to start" for two years.</p>
+    </div>
+
+    <div class="book" data-status="queued">
+      <div class="book-header">
+        <h3>The Man Without Qualities</h3>
+        <span class="badge badge-queued">queued</span>
+      </div>
+      <p class="author">Robert Musil — 1930–43</p>
+      <span class="tag">fiction</span>
+      <p class="note">1,774 pages. Unfinished at Musil's death. Set in the last years of the Austro-Hungarian Empire. People describe it as one of the great novels of the 20th century and also as something that requires a dedicated three-month reading period. Waiting for the right three months.</p>
+    </div>
+
+  </div>
+
+  <script>
+    function filter(status, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      document.querySelectorAll('.book').forEach(book => {
+        book.style.display = (status === 'all' || book.dataset.status === status) ? '' : 'none'
+      })
+    }
+  </script>
+</body>
+</html>

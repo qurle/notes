@@ -18,11 +18,19 @@ header
         padding: var(--space-s) var(--space-m)
         border-radius: var(--radius-l)
 
-    button
+    a, button
         display: block
         opacity: .25
+        position: relative
 
         transition: opacity var(--transition-s), transform var(--transition-m)
+        &::before
+            content: ''
+            border-radius: var(--space-m)
+            position: absolute
+            inset: calc(-1 * var(--space-m))
+        &:focus-visible::before
+            border-color: var(--color-main)
         &:hover
             opacity: .5
 
@@ -31,32 +39,32 @@ header
         height: 24px
         width: 24px
 
-    .left
-        height: 24px
+    // .left
+    //     height: 24px
 
-        .add, .back
-            position: absolute
-            transition: opacity var(--transition-m), transform var(--transition-m)
-            opacity: 0
-            pointer-events: none
-            transform: scale(0.65)
-            transition-delay: 0
+    //     .add, .back
+    //         position: absolute
+    //         transition: opacity var(--transition-m), transform var(--transition-m)
+    //         opacity: 0
+    //         pointer-events: none
+    //         transform: scale(0.65)
+    //         transition-delay: 0
 
-        &:not([data-context='home']) .back, &[data-context='home'] .add
-            opacity: .25
-            pointer-events: all
-            transform: scale(1)
-            transition: opacity var(--transition-s), transform var(--transition-s)
-            transition-delay: 100ms
+    //     &:not([data-context='home']) .back, &[data-context='home'] .add
+    //         opacity: .25
+    //         pointer-events: all
+    //         transform: scale(1)
+    //         transition: opacity var(--transition-s), transform var(--transition-s)
+    //         transition-delay: 100ms
 
-            &:hover
-                opacity: .5
+    //         &:hover
+    //             opacity: .5
 
     .center
         position: absolute
         left: calc(50% - 1em - calc(var(--space-l)/2))
 
-    .center, .right
+    .left, .center, .right
         display: flex
         flex-direction: row
         gap: var(--space-l)
