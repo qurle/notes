@@ -1,57 +1,49 @@
 ---
 import DocLayout from '@layouts/DocLayout.astro'
 import { unique } from '@scripts/utils/unique'
-import { undefined } from 'astro:schema'
 
 export function getStaticPaths() {
-  console.debug('Got folder')
+  const allPaths = Object.keys(
+    import.meta.glob<Record<string, any>>([
+      './*.{astro,html,mdx,md}',    // Root folder
+      './**/*.{astro,html,mdx,md}', // Other folders
+    ], {
+      eager: true,
+      query: '?url',
+    }),
+  )
+
   const folders = unique(
-    Object.keys(
-      import.meta.glob<Record<string, any>>([
-        './*.{astro,html,mdx,md}',    // Root folder
-        './**/*.{astro,html,mdx,md}', // Other folders
-      ], 
-      {
-        eager: true,
-        query: '?url',
-      }),
-    )
+    allPaths
       .filter((path) => path.split('/').length > 2)
       .map((path) => path.replace(/^\.\/|\/[^\/]*$/g, '')),
   )
 
-  return [...folders.map(
-    (folder) => ({ params: { folder } })
-  ), { params: { folder: '' } }]
+  return [
+    ...folders.map((folder) => ({ params: { folder } })),
+    { params: { folder: '' } },
+  ]
 }
 
 const { folder } = Astro.params
 
-console.debug(`Resolved folder: ${folder}`)
-
 const currentPath = folder ? `./${folder}/` : './'
-console.debug(`Current path: ${currentPath}`)
-
 const currentFolder = currentPath.split('/').slice(0, -1).pop()
-console.debug(`Current folder: ${currentFolder}`)
 
-const resolvedBack = folder ? currentPath.replace(`/${currentFolder}/`, '').replace('.', '') : null
+const resolvedBack = folder
+  ? currentPath.replace(`/${currentFolder}/`, '').replace('.', '')
+  : null
 const backPath = folder ? (resolvedBack || '/') : null
-console.debug(`Back path: ${backPath}`)
 
 const contents = Object.keys(
   import.meta.glob<Record<string, any>>([
-        './*.{astro,html,mdx,md}',    // Root folder
-        './**/*.{astro,html,mdx,md}', // Other folders
-      ], 
-      {
-        eager: true,
-        query: '?url',
+    './*.{astro,html,mdx,md}',    // Root folder
+    './**/*.{astro,html,mdx,md}', // Other folders
+  ], {
+    eager: true,
+    query: '?url',
   }),
 ).filter((path) => path.startsWith(currentPath))
-
-console.debug(`Contents:`)
-console.debug(contents)
 
 const folders = unique(
   contents
@@ -59,23 +51,9 @@ const folders = unique(
     .map((path) => path.substring(0, path.lastIndexOf('/')).replace(currentPath, '')),
 )
 
-console.debug(contents)
-console.debug(contents.map(path => path.replace(currentPath, '')))
-
-console.debug(`Folders:`)
-console.debug(folders)
-
-const pages = Object.keys(
-  import.meta.glob<Record<string, any>>('./**/*.{astro,html,mdx,md}', {
-    eager: true,
-    query: '?url',
-  }),
-)
+const pages = contents
   .filter((path) => path.replace(currentPath, '').split('/').length === 1)
   .map((path) => path.replace(/^\.(.+)\.[^.]+$/, '$1'))
-
-console.debug(`Pages:`)
-console.debug(pages)
 ---
 
 <DocLayout headerConfig = {{backUrl: backPath}}>

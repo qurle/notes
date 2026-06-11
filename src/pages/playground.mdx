@@ -1,0 +1,31 @@
+---
+title: Playground
+simpleTitle: true
+---
+
+import ParticleBurst from '@components/ParticleBurst.astro'
+
+# **Playground**
+
+This page is an **MDX** example: regular Markdown content, plus Astro
+components dropped in wherever they're needed.
+
+## Markdown still works
+
+- Headings, lists and links behave exactly like in `.md` files
+- So do *emphasis*, **strong text** and `inline code`
+- Including code blocks:
+
+```js
+export function hello(name) {
+  return `Hello, ${name}!`
+}
+```
+
+> A blockquote, for completeness.
+
+## Bring your own components
+
+Here's a small canvas-based particle burst — click the button.
+
+<ParticleBurst label="Boom" />

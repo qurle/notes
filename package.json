@@ -6,6 +6,10 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "build:css": "sass src/styles/global.sass:public/global.css --no-source-map --style=compressed",
+    "build:css:watch": "sass --watch src/styles/global.sass:public/global.css --no-source-map",
+    "predev": "npm run build:css",
+    "prebuild": "npm run build:css",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

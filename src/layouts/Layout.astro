@@ -1,6 +1,5 @@
 ---
 import Icons from '@components/utils/Icons.astro'
-import '@styles/global.sass'
 
 const defaultTitle = 'ресерчи.'
 const {
@@ -31,6 +30,8 @@ const base = Astro.url.pathname.endsWith('/')
       content="width=device-width initial-scale=1 interactive-widget=resizes-content"
     />
     <meta name="theme-color" content="var(--color-background)" />
+
+    <link rel="stylesheet" href="/global.css" />
 
     <meta name="msapplication-TileColor" content="#575757" />
     <meta name="msapplication-navbutton-color" content="#161616" />
