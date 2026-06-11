@@ -1,0 +1,25 @@
+@layer basic-layout
+    html
+        font-family: var(--font-main)
+        background: var(--color-background)
+
+    html,
+    body
+        min-height: 100vh
+        overflow-x: hidden
+
+    body
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        margin: 0 auto
+        padding: var(--page-padding-v) var(--page-padding)
+
+        font-size: var(--font-size-m)
+        transition: background-color var(--transition-s)
+        > *
+            max-width: var(--page-width)
+
+    main
+        width: 100%

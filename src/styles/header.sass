@@ -1,0 +1,93 @@
+header
+    display: flex
+    justify-content: space-between
+    width: 100%
+    position: relative
+
+    margin-bottom: calc(var(--space-2xl))
+
+    font-family: var(--font-sans)
+    font-size: var(--font-size-xs)
+
+    z-index: 2
+
+    .subtitle
+        color: var(--color-main-25)
+        border: 1px solid var(--color-main-15)
+        font-size: 0.75rem
+        padding: var(--space-s) var(--space-m)
+        border-radius: var(--radius-l)
+
+    button
+        display: block
+        opacity: .25
+
+        transition: opacity var(--transition-s), transform var(--transition-m)
+        &:hover
+            opacity: .5
+
+    svg
+        display: block
+        height: 24px
+        width: 24px
+
+    .left
+        height: 24px
+
+        .add, .back
+            position: absolute
+            transition: opacity var(--transition-m), transform var(--transition-m)
+            opacity: 0
+            pointer-events: none
+            transform: scale(0.65)
+            transition-delay: 0
+
+        &:not([data-context='home']) .back, &[data-context='home'] .add
+            opacity: .25
+            pointer-events: all
+            transform: scale(1)
+            transition: opacity var(--transition-s), transform var(--transition-s)
+            transition-delay: 100ms
+
+            &:hover
+                opacity: .5
+
+    .center
+        position: absolute
+        left: calc(50% - 1em - calc(var(--space-l)/2))
+
+    .center, .right
+        display: flex
+        flex-direction: row
+        gap: var(--space-l)
+
+    .copy
+        position: relative
+        pointer-events: all
+        .ready-icon
+            position: absolute
+            inset: 0
+            opacity: 0
+
+        &.ready
+            pointer-events: none
+            .ready-icon
+                animation: 500ms ease-out 2 alternate both fade-in-and-out
+            .copy-icon
+                animation: 500ms ease-in 2 alternate-reverse both fade-in-and-out
+
+@media print
+    header.editor-header
+        display: none
+
+// Animations
+@keyframes fade-in-and-out
+    0%
+        opacity: 0
+        filter: blur(3px)
+        transform: scale(0.8)
+
+    80%, 100%
+        opacity: 1
+        filter: blur(0)
+        transform: scale(1)

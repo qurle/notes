@@ -1,0 +1,23 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Header from '@components/Header.astro'
+
+const { frontmatter, headerConfig = {} } = Astro.props
+const { showCopy, showDownload, backUrl } = headerConfig
+---
+
+<Layout title={frontmatter?.title} simpleTitle={frontmatter?.simpleTitle}>
+  {
+    !frontmatter?.hideHeader && (
+      <Header
+        {backUrl}
+        {showCopy}
+        {showDownload}
+        hideBack={frontmatter?.hideBack}
+      />
+    )
+  }
+  <div class="blocks">
+    <slot />
+  </div>
+</Layout>

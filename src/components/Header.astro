@@ -1,0 +1,52 @@
+---
+import '@styles/header.sass'
+import { Icon } from 'astro-icon/components'
+
+const { hideBack, backUrl, showCopy, showDownload } = Astro.props
+---
+
+<header>
+  <div class="left">
+    <div class="icon-swap">
+      {
+        !hideBack && backUrl && (
+          <a class="back" href={backUrl}>
+            <Icon name="dinkie-icons:black-left-double-triangle" />
+          </a>
+        )
+      }
+    </div>
+  </div>
+  <div class="center">
+    {
+      showCopy && (
+        <button class="copy">
+          <Icon class="copy-icon" name="dinkie-icons:copies" />
+          <Icon class="ready-icon" name="dinkie-icons:thumb-up-face" />
+        </button>
+      )
+    }
+    {
+      showDownload && (
+        <button class="download">
+          <Icon name="dinkie-icons:download" />
+        </button>
+      )
+    }
+  </div>
+  <div class="right">
+    <button class="fonts"><Icon name="dinkie-icons:u1fae0" /> </button>
+    <button class="theme"><Icon name="dinkie-icons:skull" /> </button>
+  </div>
+</header>
+<script>
+  import { cycleFonts } from '@scripts/actions/fonts'
+  import { cycleThemes } from '@scripts/actions/themes'
+  import { getByClass } from '@scripts/utils/getElements'
+
+  const fontEl = getByClass('fonts')
+  const themeEl = getByClass('theme')
+
+  fontEl.addEventListener('click', cycleFonts)
+  themeEl.addEventListener('click', cycleThemes)
+</script>

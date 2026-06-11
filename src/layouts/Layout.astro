@@ -1,0 +1,64 @@
+---
+import Icons from '@components/utils/Icons.astro'
+import '@styles/global.sass'
+
+const defaultTitle = 'ресерчи.'
+const {
+  title = defaultTitle,
+  simpleTitle = false,
+  description = 'ресерчи от нейросетей',
+  class: className,
+} = Astro.props
+
+let pageTitle = defaultTitle
+if (title !== defaultTitle)
+  pageTitle = simpleTitle ? title : `${title} | ${defaultTitle}`
+
+const base = Astro.url.pathname.endsWith('/')
+  ? Astro.url.pathname
+  : Astro.url.pathname + '/'
+---
+
+<!doctype html>
+<html lang="en" data-font="serif" data-theme="light">
+  <head>
+    <base href={base} target="_self" />
+    <meta charset="UTF-8" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="viewport"
+      content="width=device-width initial-scale=1 interactive-widget=resizes-content"
+    />
+    <meta name="theme-color" content="var(--color-background)" />
+
+    <meta name="msapplication-TileColor" content="#575757" />
+    <meta name="msapplication-navbutton-color" content="#161616" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#161616" />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:image" content="/og/main.png" />
+    <meta property="vk:image" content="/og/main-vk.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og/main.png" />
+
+    <Icons />
+    <!-- <link rel="manifest" href="/site.webmanifest" /> -->
+
+    <script is:inline>
+      // This thing comes inline to avoid flickering when your
+      // theme is not default. Sorry, just saving your eyes!
+      function loadMode(mode) {
+        const value = localStorage.getItem(mode)
+        if (value && value !== 'undefined') {
+          document.documentElement.dataset[mode] = value
+        }
+      }
+      loadMode('theme')
+      loadMode('font')
+    </script>
+  </head>
+  <body class={className}>
+    <slot />
+  </body>
+</html>

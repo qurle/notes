@@ -1,17 +1,28 @@
 ---
+import DocLayout from '@layouts/DocLayout.astro'
 
+const pages = Object.keys(
+  import.meta.glob<Record<string, any>>('./**/*.{astro,html,mdx,md}', {
+    eager: true,
+    query: '?url',
+  }),
+).filter((page) => !page.includes('...'))
+
+// console.log(pages)
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<DocLayout>
+  <h1>ресерчи</h1>
+
+  <ul class="pages">
+    {
+      pages.map((page) => (
+        <li>
+          <a href={page.substring(0, page.lastIndexOf('.'))}>
+            {page.split('/').at(-1)}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</DocLayout>

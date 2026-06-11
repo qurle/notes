@@ -1,0 +1,83 @@
+@forward '@styles/fonts.sass'
+@layer  variables
+    :root
+        --color-background: oklch(98% 0 0)
+        --color-background-50: color-mix(in hsl, var(--color-background) 50%, transparent)
+        --color-background-75: color-mix(in hsl, var(--color-background) 75%, transparent)
+
+        --color-main: oklch(20% 0 0)
+        --color-main-05: color-mix(in hsl, var(--color-main) 5%, transparent)
+        --color-main-15: color-mix(in hsl, var(--color-main) 15%, transparent)
+        --color-main-25: color-mix(in hsl, var(--color-main) 25%, transparent)
+        --color-main-50: color-mix(in hsl, var(--color-main) 50%, transparent)
+
+        --font-main: var(--font-serif)
+        --font-size-m: 1.125rem
+        --font-size-s: 1.05rem
+        --font-size-xs: 0.9rem
+
+        --font-serif: 'PT Serif', 'Playfair', 'Georgia', serif
+        --font-mono: 'PT Mono', 'Anonymous Pro', 'Courier', monospace
+        --font-sans: -apple-system, BlinkMacSystemFont, 'Mulish', 'Inter', 'Helvetica Neue', 'Helvetica', -apple-system, -system-ui, sans-serif
+        --font-digital: 'Pixeloid', 'Handjet', 'Courier', monospace
+
+        --color-light: oklch(98% 0 0)
+        --color-dark: oklch(20% 0 0)
+        --color-sepia: #c7b1a5
+        --color-blue: #272d86
+
+        --page-padding: 1.5rem
+        --page-padding-v: 3rem
+        --page-width: 640px
+
+        --space-s: 0.25rem
+        --space-m: 0.5rem
+        --space-l: 1rem
+        --space-xl: 2rem
+        --space-2xl: 3rem
+
+        --radius-m: 0.25rem
+        --radius-l: 0.5rem
+        --radius-xl: 1rem
+        --radius-max: 67rem
+
+        --transition-easing: cubic-bezier(0.75, 0, 0.25, 1)
+        --transition-xs: 100ms linear
+        --transition-s: 175ms var(--transition-easing)
+        --transition-m: 300ms var(--transition-easing)
+
+        --shadow-color: var(--color-main-25)
+
+        --shadow-l: 0 24px 32px -16px var(--shadow-color)
+
+        --icon-filter: invert(0)
+
+        @media screen and (max-width: 640px)
+            :root
+                --font-size-m: 1rem
+                --font-size-s: 0.95rem
+                --font-size-xs: 0.85rem
+                --page-padding: 1.5rem
+                --page-padding-v: 2rem
+
+        :root[data-font="serif"]
+            --font-main: var(--font-serif)
+
+        :root[data-font="mono"]
+            --font-main: var(--font-mono)
+
+        :root[data-font="sans"]
+            --font-main: var(--font-sans)
+
+        :root[data-theme="dark"]
+            --color-background: var(--color-dark)
+            --color-main: oklch(92% 0 0)
+            --icon-filter: invert(1)
+            --shadow-color: var(--color-main-05)
+
+        :root[data-theme="digital"]
+            --color-background: #001108
+            --color-main: #21e386
+            --font-main: var(--font-digital)
+            --icon-filter: invert(94%) sepia(46%) saturate(2279%) hue-rotate(71deg) brightness(94%) contrast(88%)
+            --shadow-color: var(--color-main-15)

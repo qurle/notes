@@ -1,0 +1,35 @@
+@layer reset
+    /* Resetting browser styling 'cause we're more than that */
+    *
+        margin: 0
+        padding: 0
+        box-sizing: border-box
+
+    button, input:not([type=checkbox])
+        background: none
+        border: none
+        color: inherit
+        font: inherit
+        box-shadow: none
+        -webkit-appearance: none
+        text-align: left
+        &:focus
+            outline: none
+
+    :focus-visible
+        outline: none
+
+    a
+        text-decoration: none
+        color: inherit
+        font: inherit
+
+    ul
+        list-style: none
+
+    samp
+        font-family: inherit
+
+    body
+        color: var(--color-main)
+        background-color: var(--color-background)

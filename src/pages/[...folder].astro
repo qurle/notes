@@ -1,0 +1,87 @@
+---
+import DocLayout from '@layouts/DocLayout.astro'
+import { unique } from '@scripts/utils/unique'
+
+export function getStaticPaths() {
+  console.log('Got folder')
+  const folders = unique(
+    Object.keys(
+      import.meta.glob<Record<string, any>>('./**/*.{astro,html,mdx,md}', {
+        eager: true,
+        query: '?url',
+      }),
+    )
+      .filter((path) => path.split('/').length > 2)
+      .map((path) => path.replace(/^\.\/|\/[^\/]*$/g, '')),
+  )
+
+  console.log(`Folders with content`)
+  console.log(folders)
+
+  return folders.map((folder) => ({ params: { folder } }))
+}
+
+const { folder } = Astro.params
+
+const currentPath = `./${folder}/`
+console.log(`Current path: ${currentPath}`)
+
+const contents = Object.keys(
+  import.meta.glob<Record<string, any>>('./**/*.{astro,html,mdx,md}', {
+    eager: true,
+    query: '?url',
+  }),
+).filter((path) => path.startsWith(currentPath))
+
+console.log(`Contents:`)
+console.log(contents)
+
+const folders = unique(
+  contents
+    .filter((path) => path.replace(currentPath, '').split('/').length === 2)
+    .map((path) => path.substring(0, path.lastIndexOf('/')).replace(currentPath, '')),
+)
+
+console.log(contents)
+console.log(contents.map(path => path.replace(currentPath, '')))
+
+console.log(`Folders:`)
+console.log(folders)
+
+const pages = Object.keys(
+  import.meta.glob<Record<string, any>>('./**/*.{astro,html,mdx,md}', {
+    eager: true,
+    query: '?url',
+  }),
+)
+  .filter((path) => path.match(new RegExp(`^\\.\\/${folder}\\/[^/]+$`)))
+  .map((path) => path.replace(/^\.(.+)\.[^.]+$/, '$1'))
+
+console.log(`Pages:`)
+console.log(pages)
+---
+
+<DocLayout>
+  <h1>{folder}/</h1>
+  { folders.length > 0 && <ul class="folders">
+    {
+      folders.map((path) => (
+        <li>
+          <a href={path}>{path.split('/').at(-1)}/</a>
+        </li>
+      ))
+    }
+  </ul>
+  <hr />}
+  {
+  pages.length > 0 &&<ul class="pages">
+    {
+      pages.map((path) => (
+        <li>
+          <a href={path}>{path.split('/').at(-1)}</a>
+        </li>
+      ))
+    }
+  </ul>
+  }
+</DocLayout>
