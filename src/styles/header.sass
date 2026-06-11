@@ -39,27 +39,6 @@ header
         height: 24px
         width: 24px
 
-    // .left
-    //     height: 24px
-
-    //     .add, .back
-    //         position: absolute
-    //         transition: opacity var(--transition-m), transform var(--transition-m)
-    //         opacity: 0
-    //         pointer-events: none
-    //         transform: scale(0.65)
-    //         transition-delay: 0
-
-    //     &:not([data-context='home']) .back, &[data-context='home'] .add
-    //         opacity: .25
-    //         pointer-events: all
-    //         transform: scale(1)
-    //         transition: opacity var(--transition-s), transform var(--transition-s)
-    //         transition-delay: 100ms
-
-    //         &:hover
-    //             opacity: .5
-
     .center
         position: absolute
         left: calc(50% - 1em - calc(var(--space-l)/2))
@@ -69,23 +48,8 @@ header
         flex-direction: row
         gap: var(--space-l)
 
-    .copy
-        position: relative
-        pointer-events: all
-        .ready-icon
-            position: absolute
-            inset: 0
-            opacity: 0
-
-        &.ready
-            pointer-events: none
-            .ready-icon
-                animation: 500ms ease-out 2 alternate both fade-in-and-out
-            .copy-icon
-                animation: 500ms ease-in 2 alternate-reverse both fade-in-and-out
-
 @media print
-    header.editor-header
+    header, footer
         display: none
 
 // Animations

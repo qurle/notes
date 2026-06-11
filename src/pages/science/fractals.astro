@@ -1,8 +1,8 @@
 ---
-import DocLayout from '@layouts/DocLayout.astro'
+import NoteLayout from '@layouts/NoteLayout.astro'
 ---
 
-<DocLayout>
+<NoteLayout>
   <h1>Fractals</h1>
   <p>
     Geometric shapes that are self-similar at every scale. The boundary between
@@ -11,24 +11,25 @@ import DocLayout from '@layouts/DocLayout.astro'
 
   <h2>Mandelbrot set</h2>
   <p>
-    The set of complex numbers <em>c</em> for which the iteration
-    z<sub>n+1</sub> = z<sub>n</sub>² + c does not diverge to infinity, starting
-    from z₀ = 0. Colour encodes how quickly each point escapes.
+    The set of complex numbers <em>c</em> for which the iteration z<sub>n+1</sub
+    > = z<sub>n</sub>² + c does not diverge to infinity, starting from z₀ = 0.
+    Colour encodes how quickly each point escapes.
   </p>
 
-  <canvas id="mandelbrot" width="700" height="460" style="width:100%;display:block;background:#000;"></canvas>
+  <canvas
+    id="mandelbrot"
+    width="700"
+    height="460"
+    style="width:100%;display:block;background:#000;"></canvas>
 
   <h2>The iteration</h2>
 
-  ```
-  z₀ = 0
-  z₁ = 0² + c = c
-  z₂ = c² + c
-  z₃ = (c² + c)² + c
-  ...
-  ```
+  ``` z₀ = 0 z₁ = 0² + c = c z₂ = c² + c z₃ = (c² + c)² + c ... ```
 
-  <p>If |z<sub>n</sub>| stays ≤ 2 after <em>n</em> iterations, <em>c</em> is (probably) in the set.</p>
+  <p>
+    If |z<sub>n</sub>| stays ≤ 2 after <em>n</em> iterations, <em>c</em> is (probably)
+    in the set.
+  </p>
 
   <h2>Sierpiński triangle</h2>
   <p>
@@ -36,52 +37,86 @@ import DocLayout from '@layouts/DocLayout.astro'
     each remaining triangle, forever. Fractal dimension: log(3)/log(2) ≈ 1.585.
   </p>
 
-  <canvas id="sierpinski" width="700" height="610" style="width:100%;display:block;background:#0a0a0a;"></canvas>
+  <canvas
+    id="sierpinski"
+    width="700"
+    height="610"
+    style="width:100%;display:block;background:#0a0a0a;"></canvas>
 
   <h2>Julia sets</h2>
   <p>
-    For each fixed <em>c</em>, the Julia set is the boundary of points that don't
-    escape under z → z² + c. Every point in the Mandelbrot set corresponds to a
-    connected Julia set; outside → disconnected (Cantor dust).
+    For each fixed <em>c</em>, the Julia set is the boundary of points that
+    don't escape under z → z² + c. Every point in the Mandelbrot set corresponds
+    to a connected Julia set; outside → disconnected (Cantor dust).
   </p>
 
-  <canvas id="julia" width="700" height="460" style="width:100%;display:block;background:#000;"></canvas>
+  <canvas
+    id="julia"
+    width="700"
+    height="460"
+    style="width:100%;display:block;background:#000;"></canvas>
 
   <label style="display:block;margin-top:0.75rem;">
     <span style="font-size:0.9rem;">c = </span>
-    <input id="julia-re" type="range" min="-1.5" max="1.5" step="0.01" value="-0.7" style="width:180px;">
+    <input
+      id="julia-re"
+      type="range"
+      min="-1.5"
+      max="1.5"
+      step="0.01"
+      value="-0.7"
+      style="width:180px;"
+    />
     <span>+</span>
-    <input id="julia-im" type="range" min="-1.5" max="1.5" step="0.01" value="0.27" style="width:180px;">
+    <input
+      id="julia-im"
+      type="range"
+      min="-1.5"
+      max="1.5"
+      step="0.01"
+      value="0.27"
+      style="width:180px;"
+    />
     <span>i</span>
-    <span id="julia-label" style="margin-left:0.5rem;font-family:monospace;font-size:0.85rem;"></span>
+    <span
+      id="julia-label"
+      style="margin-left:0.5rem;font-family:monospace;font-size:0.85rem;"
+    ></span>
   </label>
 
   <script>
     function drawMandelbrot() {
       const canvas = document.getElementById('mandelbrot')
       const ctx = canvas.getContext('2d')
-      const W = canvas.width, H = canvas.height
+      const W = canvas.width,
+        H = canvas.height
       const MAX = 120
       const img = ctx.createImageData(W, H)
       for (let px = 0; px < W; px++) {
         for (let py = 0; py < H; py++) {
           const cx = (px / W) * 3.5 - 2.5
           const cy = (py / H) * 2.0 - 1.0
-          let x = 0, y = 0, n = 0
-          while (x*x + y*y <= 4 && n < MAX) {
-            const tmp = x*x - y*y + cx
-            y = 2*x*y + cy; x = tmp; n++
+          let x = 0,
+            y = 0,
+            n = 0
+          while (x * x + y * y <= 4 && n < MAX) {
+            const tmp = x * x - y * y + cx
+            y = 2 * x * y + cy
+            x = tmp
+            n++
           }
           const i = (py * W + px) * 4
           if (n === MAX) {
-            img.data[i] = img.data[i+1] = img.data[i+2] = 0
+            img.data[i] = img.data[i + 1] = img.data[i + 2] = 0
           } else {
             const t = n / MAX
-            img.data[i]   = Math.floor(9*(1-t)*t*t*t * 255)
-            img.data[i+1] = Math.floor(15*(1-t)*(1-t)*t*t * 255)
-            img.data[i+2] = Math.floor(8.5*(1-t)*(1-t)*(1-t)*t * 255)
+            img.data[i] = Math.floor(9 * (1 - t) * t * t * t * 255)
+            img.data[i + 1] = Math.floor(15 * (1 - t) * (1 - t) * t * t * 255)
+            img.data[i + 2] = Math.floor(
+              8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255,
+            )
           }
-          img.data[i+3] = 255
+          img.data[i + 3] = 255
         }
       }
       ctx.putImageData(img, 0, 0)
@@ -92,29 +127,54 @@ import DocLayout from '@layouts/DocLayout.astro'
       const ctx = canvas.getContext('2d')
       ctx.fillStyle = '#0a0a0a'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
-      const colors = ['#6ee7f7','#a78bfa','#34d399','#f472b6','#fbbf24','#60a5fa','#f87171','#a3e635']
+      const colors = [
+        '#6ee7f7',
+        '#a78bfa',
+        '#34d399',
+        '#f472b6',
+        '#fbbf24',
+        '#60a5fa',
+        '#f87171',
+        '#a3e635',
+      ]
       function tri(ax, ay, bx, by, cx, cy, depth) {
         if (depth === 0) {
-          ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.lineTo(cx,cy)
+          ctx.beginPath()
+          ctx.moveTo(ax, ay)
+          ctx.lineTo(bx, by)
+          ctx.lineTo(cx, cy)
           ctx.closePath()
           ctx.fillStyle = colors[depth % colors.length] || '#fff'
-          ctx.fill(); return
+          ctx.fill()
+          return
         }
-        const mx1=(ax+bx)/2, my1=(ay+by)/2
-        const mx2=(bx+cx)/2, my2=(by+cy)/2
-        const mx3=(ax+cx)/2, my3=(ay+cy)/2
-        tri(ax,ay,mx1,my1,mx3,my3,depth-1)
-        tri(mx1,my1,bx,by,mx2,my2,depth-1)
-        tri(mx3,my3,mx2,my2,cx,cy,depth-1)
+        const mx1 = (ax + bx) / 2,
+          my1 = (ay + by) / 2
+        const mx2 = (bx + cx) / 2,
+          my2 = (by + cy) / 2
+        const mx3 = (ax + cx) / 2,
+          my3 = (ay + cy) / 2
+        tri(ax, ay, mx1, my1, mx3, my3, depth - 1)
+        tri(mx1, my1, bx, by, mx2, my2, depth - 1)
+        tri(mx3, my3, mx2, my2, cx, cy, depth - 1)
       }
       const p = 16
-      tri(canvas.width/2, p, canvas.width-p, canvas.height-p, p, canvas.height-p, 7)
+      tri(
+        canvas.width / 2,
+        p,
+        canvas.width - p,
+        canvas.height - p,
+        p,
+        canvas.height - p,
+        7,
+      )
     }
 
     function drawJulia(cr, ci) {
       const canvas = document.getElementById('julia')
       const ctx = canvas.getContext('2d')
-      const W = canvas.width, H = canvas.height
+      const W = canvas.width,
+        H = canvas.height
       const MAX = 100
       const img = ctx.createImageData(W, H)
       for (let px = 0; px < W; px++) {
@@ -122,20 +182,22 @@ import DocLayout from '@layouts/DocLayout.astro'
           let x = (px / W) * 3.5 - 1.75
           let y = (py / H) * 2.3 - 1.15
           let n = 0
-          while (x*x + y*y <= 4 && n < MAX) {
-            const tmp = x*x - y*y + cr
-            y = 2*x*y + ci; x = tmp; n++
+          while (x * x + y * y <= 4 && n < MAX) {
+            const tmp = x * x - y * y + cr
+            y = 2 * x * y + ci
+            x = tmp
+            n++
           }
           const i = (py * W + px) * 4
           if (n === MAX) {
-            img.data[i] = img.data[i+1] = img.data[i+2] = 0
+            img.data[i] = img.data[i + 1] = img.data[i + 2] = 0
           } else {
             const t = n / MAX
-            img.data[i]   = Math.floor(255 * t * t)
-            img.data[i+1] = Math.floor(255 * (1-t) * t * 4)
-            img.data[i+2] = Math.floor(255 * (1-t))
+            img.data[i] = Math.floor(255 * t * t)
+            img.data[i + 1] = Math.floor(255 * (1 - t) * t * 4)
+            img.data[i + 2] = Math.floor(255 * (1 - t))
           }
-          img.data[i+3] = 255
+          img.data[i + 3] = 255
         }
       }
       ctx.putImageData(img, 0, 0)
@@ -143,7 +205,7 @@ import DocLayout from '@layouts/DocLayout.astro'
 
     const reInput = document.getElementById('julia-re')
     const imInput = document.getElementById('julia-im')
-    const label   = document.getElementById('julia-label')
+    const label = document.getElementById('julia-label')
 
     function updateJulia() {
       const cr = parseFloat(reInput.value)
@@ -159,4 +221,4 @@ import DocLayout from '@layouts/DocLayout.astro'
     drawSierpinski()
     updateJulia()
   </script>
-</DocLayout>
+</NoteLayout>

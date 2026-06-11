@@ -1,6 +1,8 @@
 ---
-import DocLayout from '@layouts/DocLayout.astro'
+import NoteLayout from '@layouts/NoteLayout.astro'
 import { unique } from '@scripts/utils/unique'
+
+const rootPageName = 'home/'
 
 export function getStaticPaths() {
   const folders = unique(
@@ -23,6 +25,8 @@ export function getStaticPaths() {
 const { folder } = Astro.params
 const currentPath = folder ? `./${folder}/` : './'
 const currentFolder = folder?.split('/').at(-1)
+
+const title = folder ? currentFolder + '/' : rootPageName
 
 const allFiles = Object.keys(
   import.meta.glob<Record<string, any>>(
@@ -49,8 +53,8 @@ const pages = contents
   }))
 ---
 
-<DocLayout>
-  <h1>{folder ? currentFolder : 'home'}/</h1>
+<NoteLayout {title}>
+  <h1>{title}</h1>
   <ul class="entries">
     {
       folders.map((path) => (
@@ -68,7 +72,7 @@ const pages = contents
       ))
     }
   </ul>
-</DocLayout>
+</NoteLayout>
 <script>
   const links = Array.from(
     document.querySelectorAll<HTMLAnchorElement>('.entries a'),

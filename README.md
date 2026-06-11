@@ -1,43 +1,63 @@
-# Astro Starter Kit: Minimal
+# notes.
 
-```sh
-npm create astro@latest -- --template minimal
+A simple [Astro](https://astro.build) page storage inspired by [type.baby](https://type.baby).
+
+## Content
+
+Add `.md`, `.mdx`, `.astro`, or `.html` files to `src/pages/` and organize them into subfolders however you like. The site automatically generates a navigable directory listing for every folder.
+
+- **Markdown / MDX** — styled automatically, no extra steps
+- **Astro pages** — wrap your content in `NoteLayout` to get the same styling:
+  ```astro
+  ---
+  import NoteLayout from '@layouts/NoteLayout.astro'
+  ---
+  <NoteLayout>your content</NoteLayout>
+  ```
+- **HTML pages** — listed and served as-is, no styling applied
+
+```
+src/pages/
+├── films/
+│   ├── blade-runner.md
+│   ├── 2001.mdx
+│   └── directors/
+│       ├── lynch.md
+│       └── kubrick/
+│           └── full-metal-jacket.md
+├── music/
+│   ├── radiohead.md
+│   └── genres/
+│       └── post-rock.md
+├── science/
+│   ├── fractals.astro
+│   └── quantum.md
+└── personal/
+    ├── setup.md
+    └── notes/
+        └── coffee.md
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Run locally
 
-## 🚀 Project Structure
+1. Install [Node.js](https://nodejs.org) (v22.12.0 or newer)
+2. Download this repository
+3. Open terminal in the project folder and run:
+   ```sh
+   npm install
+   npm run dev
+   ```
+4. Open the link from the terminal (usually [http://localhost:4321](http://localhost:4321))
 
-Inside of your Astro project, you'll see the following folders and files:
+## Customization
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Styles** — `src/styles/`
+- **Folder page logic** — `src/pages/[...folder].astro`
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## License
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+[GPL-3.0](LICENSE)
 
-Any static assets, like images, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Like that? Check out [type.baby](https://type.baby) — a zen markdown editor, an insiration for notes.

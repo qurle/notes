@@ -31,6 +31,9 @@
       "@images/*": [
         "./src/assets/images/*"
       ],
+      "@fonts/*": [
+        "./src/assets/fonts/*"
+      ],
       "@layouts/*": [
         "./src/layouts/*"
       ],

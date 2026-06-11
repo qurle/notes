@@ -1,5 +1,5 @@
 ---
-layout: ../../../layouts/DocLayout.astro
+
 title: Warp Records
 ---
 

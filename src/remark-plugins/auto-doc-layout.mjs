@@ -1,9 +1,9 @@
-export function autoDocLayout() {
+export function autoNoteLayout() {
   return (_tree, file) => {
     const frontmatter = file.data.astro?.frontmatter
 
     if (frontmatter && !frontmatter.layout) {
-      frontmatter.layout = '@layouts/DocLayout.astro'
+      frontmatter.layout = '@layouts/NoteLayout.astro'
     }
   }
 }

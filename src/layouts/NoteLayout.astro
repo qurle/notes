@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+
+const {
+  frontmatter,
+  headerConfig = {},
+  title = frontmatter?.title,
+  simpleTitle = frontmatter?.simpleTitle,
+} = Astro.props
+const isRoot = Astro.url.pathname === '/'
+const { backUrl = isRoot ? undefined : '../' } = headerConfig
+---
+
+<Layout {title} {simpleTitle}>
+  {
+    !frontmatter?.hideHeader && (
+      <Header {backUrl} hideBack={frontmatter?.hideBack} />
+    )
+  }
+  <div class="blocks">
+    <slot />
+  </div>
+  <Footer />
+</Layout>

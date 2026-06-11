@@ -2,7 +2,7 @@
 import '@styles/header.sass'
 import { Icon } from 'astro-icon/components'
 
-const { hideBack, backUrl, showCopy, showDownload } = Astro.props
+const { hideBack, backUrl } = Astro.props
 ---
 
 <header>
@@ -11,32 +11,19 @@ const { hideBack, backUrl, showCopy, showDownload } = Astro.props
       {
         !hideBack && backUrl && (
           <a class="back" href={backUrl}>
-            <Icon name="dinkie-icons:black-left-double-triangle" />
+            <Icon name="material-symbols:arrow-back" />
           </a>
         )
       }
     </div>
   </div>
-  <div class="center">
-    {
-      showCopy && (
-        <button class="copy">
-          <Icon class="copy-icon" name="dinkie-icons:copies" />
-          <Icon class="ready-icon" name="dinkie-icons:thumb-up-face" />
-        </button>
-      )
-    }
-    {
-      showDownload && (
-        <button class="download">
-          <Icon name="dinkie-icons:download" />
-        </button>
-      )
-    }
-  </div>
   <div class="right">
-    <button class="fonts"><Icon name="dinkie-icons:u1fae0" /> </button>
-    <button class="theme"><Icon name="dinkie-icons:skull" /> </button>
+    <button class="fonts"
+      ><Icon name="material-symbols:square-outline" />
+    </button>
+    <button class="theme"
+      ><Icon name="material-symbols:circle-outline" />
+    </button>
   </div>
 </header>
 <script>
@@ -52,6 +39,6 @@ const { hideBack, backUrl, showCopy, showDownload } = Astro.props
   themeEl.addEventListener('click', cycleThemes)
 
   document.addEventListener('keydown', (e) => {
-    if (e.code === 'KeyB') backEl?.click()
+    if (e.code === 'KeyB' || e.code === 'Backspace') backEl?.click()
   })
 </script>
