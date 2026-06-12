@@ -1,18 +1,19 @@
 ---
 import NoteLayout from '@layouts/NoteLayout.astro'
-import { indexOfChar } from '@scripts/utils/indexOfChar'
 import { unique } from '@scripts/utils/unique'
 
 const rootPageName = 'home/'
 
+export const allFiles = Object.keys(
+  import.meta.glob<Record<string, any>>(
+    ['./*.{astro,html,mdx,md}', './**/*.{astro,html,mdx,md}'],
+    { eager: true, query: '?url' },
+  ),
+)
+
 export function getStaticPaths() {
   const folders = unique(
-    Object.keys(
-      import.meta.glob<Record<string, any>>(
-        ['./*.{astro,html,mdx,md}', './**/*.{astro,html,mdx,md}'],
-        { eager: true, query: '?url' },
-      ),
-    )
+    allFiles
       // Only folders
       .filter((path) => path.split('/').length > 2)
       // Remove files from routes
@@ -25,8 +26,6 @@ export function getStaticPaths() {
       ),
   )
 
-  console.log(folders)
-
   return [
     ...folders.map((folder) => ({ params: { folder } })),
     { params: { folder: '' } },
@@ -38,13 +37,6 @@ const currentPath = folder ? `./${folder}/` : './'
 const currentFolder = folder?.split('/').at(-1)
 
 const title = folder ? currentFolder + '/' : rootPageName
-
-const allFiles = Object.keys(
-  import.meta.glob<Record<string, any>>(
-    ['./*.{astro,html,mdx,md}', './**/*.{astro,html,mdx,md}'],
-    { eager: true, query: '?url' },
-  ),
-)
 
 const contents = allFiles.filter((path) => path.startsWith(currentPath))
 
@@ -88,47 +80,6 @@ const pages = contents
   </ul>
 </NoteLayout>
 <script>
-  const links = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>('.entries a'),
-  )
-
-  const RESTORE_KEY = `focusRestore:${window.location.pathname}`
-  let keyboardUsed = false
-
-  // Restore focus when returning from a subfolder entered via keyboard
-  const savedHref = sessionStorage.getItem(RESTORE_KEY)
-  if (savedHref) {
-    sessionStorage.removeItem(RESTORE_KEY)
-    links.find((l) => l.getAttribute('href') === savedHref)?.focus()
-  }
-
-  // Save focus target when navigating to any entry via keyboard
-  links.forEach((link) => {
-    link.addEventListener('click', () => {
-      if (keyboardUsed) {
-        sessionStorage.setItem(RESTORE_KEY, link.getAttribute('href')!)
-      }
-    })
-  })
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelector<HTMLAnchorElement>('.back')?.click()
-      return
-    }
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
-    e.preventDefault()
-    keyboardUsed = true
-
-    const idx = links.indexOf(document.activeElement as HTMLAnchorElement)
-    const next =
-      e.key === 'ArrowDown'
-        ? idx === -1
-          ? 0
-          : (idx + 1) % links.length
-        : idx === -1
-          ? links.length - 1
-          : (idx - 1 + links.length) % links.length
-    links[next].focus()
-  })
+  import { initFolderNavigation } from '@scripts/folderNavigation'
+  initFolderNavigation()
 </script>
