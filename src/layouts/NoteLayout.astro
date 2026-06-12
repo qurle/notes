@@ -19,8 +19,8 @@ const { backUrl = isRoot ? undefined : '../' } = headerConfig
       <Header {backUrl} hideBack={frontmatter?.hideBack} />
     )
   }
-  <div class="blocks">
+  <main class="blocks">
     <slot />
-  </div>
+  </main>
   <Footer />
 </Layout>

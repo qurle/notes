@@ -7,8 +7,6 @@ title: Quantum Computing
 
 Quantum computers exploit superposition and entanglement to perform computations that would be intractable for classical machines. Not faster at everything — specifically powerful for factoring, search, and simulating quantum systems.
 
----
-
 ## Qubits
 
 A classical bit is always 0 or 1. A qubit can be in superposition of both:
@@ -18,8 +16,6 @@ A classical bit is always 0 or 1. A qubit can be in superposition of both:
 ```
 
 where |α|² + |β|² = 1. When measured, it collapses to |0⟩ with probability |α|² or |1⟩ with probability |β|².
-
----
 
 ## Bell state in Qiskit
 
@@ -41,8 +37,6 @@ print(counts)
 
 The result is always `00` or `11` — never `01` or `10`. Measuring one qubit instantly determines the other, regardless of the distance between them.
 
----
-
 ## Quantum gates
 
 | Gate | Effect |
@@ -53,7 +47,6 @@ The result is always `00` or `11` — never `01` or `10`. Measuring one qubit in
 | T | Phase: \|1⟩ → e^(iπ/4)\|1⟩ |
 | Toffoli | Classically universal AND reversible |
 
----
 
 ## Algorithms with quantum advantage
 
@@ -62,8 +55,6 @@ The result is always `00` or `11` — never `01` or `10`. Measuring one qubit in
 **Grover's search** (1996) — finds a marked item in an unsorted database of N items in O(√N) queries, vs O(N) classically. Quadratic speedup; important for cryptanalysis.
 
 **Variational Quantum Eigensolver (VQE)** — hybrid classical-quantum for chemistry simulation. Calculates ground state energies of molecules too complex for classical methods. Active use case for near-term hardware.
-
----
 
 ## Current hardware (2024–2025)
 

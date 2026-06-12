@@ -1,5 +1,3 @@
-@use '@styles/digital.sass' as *
-
 @layer ui
     // Hiding shortcuts on mobile
     @media not (hover: hover)
@@ -124,9 +122,6 @@
             opacity: 0
             pointer-events: none
             transition: opacity var(--transition-m)
-
-    :root[data-theme="digital"]
-        @include digital
 
     @media print
         :root

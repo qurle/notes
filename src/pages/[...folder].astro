@@ -1,5 +1,6 @@
 ---
 import NoteLayout from '@layouts/NoteLayout.astro'
+import { indexOfChar } from '@scripts/utils/indexOfChar'
 import { unique } from '@scripts/utils/unique'
 
 const rootPageName = 'home/'
@@ -12,9 +13,19 @@ export function getStaticPaths() {
         { eager: true, query: '?url' },
       ),
     )
+      // Only folders
       .filter((path) => path.split('/').length > 2)
-      .map((path) => path.replace(/^\.\/|\/[^\/]*$/g, '')),
+      // Remove files from routes
+      .map((path) => path.replace(/^\.\/|\/[^\/]*$/g, ''))
+      // Add each folder on the way
+      .flatMap((folder) =>
+        folder
+          .split('/')
+          .map((_, i, arr) => arr.slice(0, i + 1).join('/') + '/'),
+      ),
   )
+
+  console.log(folders)
 
   return [
     ...folders.map((folder) => ({ params: { folder } })),
@@ -37,12 +48,15 @@ const allFiles = Object.keys(
 
 const contents = allFiles.filter((path) => path.startsWith(currentPath))
 
+const nextLevelFolders = new RegExp(
+  `^${currentPath.replace(/\./g, '\\.')}([^/]+/)`,
+)
+
 const folders = unique(
   contents
-    .filter((path) => path.replace(currentPath, '').split('/').length === 2)
-    .map((path) =>
-      path.substring(0, path.lastIndexOf('/')).replace(currentPath, ''),
-    ),
+    .filter((path) => path.replace(currentPath, '').split('/').length > 1)
+    .map((path) => path.match(nextLevelFolders)?.[1])
+    .filter(Boolean),
 )
 
 const pages = contents
@@ -51,6 +65,16 @@ const pages = contents
     href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
     name: path.split('/').at(-1),
   }))
+console.log('currentFolder')
+console.log(currentFolder)
+console.log('currentPath')
+console.log(currentPath)
+console.log('contents')
+console.log(contents)
+console.log('folders')
+console.log(folders)
+console.log('pages')
+console.log(pages)
 ---
 
 <NoteLayout {title}>
@@ -59,7 +83,7 @@ const pages = contents
     {
       folders.map((path) => (
         <li class="folder">
-          <a href={path}>{path.split('/').at(-1)}/</a>
+          <a href={path}>{path}</a>
         </li>
       ))
     }
@@ -78,9 +102,33 @@ const pages = contents
     document.querySelectorAll<HTMLAnchorElement>('.entries a'),
   )
 
+  const RESTORE_KEY = `focusRestore:${window.location.pathname}`
+  let keyboardUsed = false
+
+  // Restore focus when returning from a subfolder entered via keyboard
+  const savedHref = sessionStorage.getItem(RESTORE_KEY)
+  if (savedHref) {
+    sessionStorage.removeItem(RESTORE_KEY)
+    links.find((l) => l.getAttribute('href') === savedHref)?.focus()
+  }
+
+  // Save focus target when navigating to any entry via keyboard
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (keyboardUsed) {
+        sessionStorage.setItem(RESTORE_KEY, link.getAttribute('href')!)
+      }
+    })
+  })
+
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelector<HTMLAnchorElement>('.back')?.click()
+      return
+    }
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
     e.preventDefault()
+    keyboardUsed = true
 
     const idx = links.indexOf(document.activeElement as HTMLAnchorElement)
     const next =

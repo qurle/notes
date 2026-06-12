@@ -1,0 +1,20 @@
+
+# oh hi!
+
+Welcome to notes. — no config Astro page storage. You place your files, it works. Read more at [`intro.md`](../intro)
+
+
+<p><div id="spiral-container" style={{backgroundColor: '#111',
+position: 'relative', height: '480px', borderRadius: '2rem', overflow: 'hidden'}}>
+<canvas height='480' id="spiral"></canvas>
+<span style = {{color: '#FFFFFF80',
+  position: 'absolute',
+  top: '20px',
+  left: '20px',
+  userSelect: 'none',
+}}>drag to rotate</span>
+</div></p>
+
+<script>{`
+var width,height,lastX,lastY,div=document.getElementById('spiral-container'),canvas=document.getElementById("spiral"),context=canvas.getContext("2d"),time=0,velocity=.1,velocityTarget=.1,MAX_OFFSET=400,SPACING=4,POINTS=MAX_OFFSET/SPACING,PEAK=.25*MAX_OFFSET,POINTS_PER_LAP=6,SHADOW_STRENGTH=6;function setup(){resize(),step(),window.addEventListener("resize",resize),window.addEventListener("mousedown",onMouseDown),document.addEventListener("touchstart",onTouchStart)}function resize(){width=canvas.width=div.getBoundingClientRect().width,height=canvas.height=div.getBoundingClientRect().height}function step(){time+=velocity,velocity+=.3*(velocityTarget-velocity),clear(),render(),requestAnimationFrame(step)}function clear(){context.clearRect(0,0,width,height)}function render(){var e,t,o=width/2,n=height/2;context.globalCompositeOperation="lighter",context.strokeStyle="#fff",context.shadowColor="#fff",context.lineWidth=2,context.beginPath();for(var c=POINTS;c>0;c--){var i=c*SPACING+time%SPACING;e=Math.sin(i/POINTS_PER_LAP)*Math.PI*i,t=Math.cos(i/POINTS_PER_LAP)*Math.PI*i*.35;var s=1-Math.min(i,PEAK)/PEAK;t-=200*Math.pow(s,2),t+=200*i/MAX_OFFSET,t+=e/o*width*.1,context.globalAlpha=1-i/MAX_OFFSET,context.shadowBlur=SHADOW_STRENGTH*s,context.lineTo(o+e,n+t),context.stroke(),context.beginPath(),context.moveTo(o+e,n+t)}context.lineTo(o,n-200),context.lineTo(o,0),context.stroke()}function onMouseDown(e){lastX=e.clientX,lastY=e.clientY,document.addEventListener("mousemove",onMouseMove),document.addEventListener("mouseup",onMouseUp)}function onMouseMove(e){var t=(e.clientX-lastX)/100,o=(e.clientY-lastY)/100;e.clientY<height/2&&(t*=-1),e.clientX>width/2&&(o*=-1),velocityTarget=t+o,lastX=e.clientX,lastY=e.clientY}function onMouseUp(e){document.removeEventListener("mousemove",onMouseMove),document.removeEventListener("mouseup",onMouseUp)}function onTouchStart(e){e.preventDefault(),lastX=e.touches[0].clientX,lastY=e.touches[0].clientY,document.addEventListener("touchmove",onTouchMove),document.addEventListener("touchend",onTouchEnd)}function onTouchMove(e){var t=(e.touches[0].clientX-lastX)/100,o=(e.touches[0].clientY-lastY)/100;e.touches[0].clientY<height/2&&(t*=-1),e.touches[0].clientX>width/2&&(o*=-1),velocityTarget=t+o,lastX=e.touches[0].clientX,lastY=e.touches[0].clientY}function onTouchEnd(e){document.removeEventListener("touchmove",onTouchMove),document.removeEventListener("touchend",onTouchEnd)}setup();
+`}</script>

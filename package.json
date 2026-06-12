@@ -1,10 +1,26 @@
 {
-  "name": "research-results",
+  "name": "notes.",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "node": ">=22.12.0"
   },
+  "author": {
+    "name": "Nikita Denisov",
+    "email": "nick@qurle.net",
+    "url": "https://qurle.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qurle/notes.git"
+  },
+  "homepage": "https://github.com/qurle/notes",
+  "license": "MIT",
+  "keywords": [
+    "notes",
+    "astro",
+    "typescript"
+  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

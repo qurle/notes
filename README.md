@@ -2,6 +2,10 @@
 
 A simple [Astro](https://astro.build) page storage inspired by [type.baby](https://type.baby).
 
+**Simple** — drop a file, get a page. No config required.  
+**Keyboard-friendly** — navigate with arrow keys, go back with backspace.  
+**Scalable** — nest folders in your way, the structure follows automatically.
+
 ## Content
 
 Add `.md`, `.mdx`, `.astro`, or `.html` files to `src/pages/` and organize them into subfolders however you like. The site automatically generates a navigable directory listing for every folder.

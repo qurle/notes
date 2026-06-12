@@ -40,5 +40,7 @@ const { hideBack, backUrl } = Astro.props
 
   document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyB' || e.code === 'Backspace') backEl?.click()
+    if (e.code === 'KeyF') cycleFonts()
+    if (e.code === 'KeyT') cycleThemes()
   })
 </script>
