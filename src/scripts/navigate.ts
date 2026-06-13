@@ -10,6 +10,7 @@ export function initFolderNavigation() {
 	const links = Array.from(
 		document.querySelectorAll<HTMLAnchorElement>('.entries a'),
 	)
+	if (!links.length) return
 
 	const restoreKey = restoreKeyPrefix + window.location.pathname
 	let keyboardUsed = false
