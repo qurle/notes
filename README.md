@@ -36,7 +36,7 @@ src/pages/
 ```
 
 ### Hands on keyboard
-Browse like it's a file manager. Arrow keys move between entries, Escape or backspace takes you back. Mouse is optional, honestly.
+Browse like it's a file manager. Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
 
 ### Make it yours
 Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find the look that feels like home. Your choice is remembered.
@@ -72,6 +72,19 @@ npm run dev
 4. Open link from terminal (usually http://localhost:4321/)
 
 **Want to tweak it?** Styles live in `src/styles/`, folder page logic — in `src/pages/[...folder].astro`.
+
+### Keep it private — or share it
+Your notes are **hidden from search engines by default**. notes. ships a `site.config.json` in the project root:
+
+```json
+{
+  "indexable": false
+}
+```
+
+While `indexable` stays `false`, every page gets a `noindex` tag so crawlers skip it. Ready to go public? Flip it to `true` and redeploy.
+
+One caveat: this only hides you from search — everything in `src/pages/` is still served to anyone who has the link. Keep truly private things out of the repo.
 
 ---
 Designed and developed by [qurle](https://qurle.net). Inspired by [type.baby](https://type.baby).

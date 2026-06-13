@@ -1,6 +1,7 @@
 ---
 import Icons from '@components/utils/Icons.astro'
 import '@styles/global.sass'
+import config from '../../site.config.json'
 
 const defaultTitle = 'notes.'
 const {
@@ -26,11 +27,12 @@ const base = Astro.url.pathname.endsWith('/')
     <meta charset="UTF-8" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {!config.indexable && <meta name="robots" content="noindex, nofollow" />}
     <meta
       name="viewport"
       content="width=device-width initial-scale=1 interactive-widget=resizes-content"
     />
-    <meta name="theme-color" content="var(--color-background)" />
+    <meta name="theme-color" content="#f8f8f8" />
 
     <meta name="msapplication-TileColor" content="#575757" />
     <meta name="msapplication-navbutton-color" content="#161616" />
@@ -55,6 +57,12 @@ const base = Astro.url.pathname.endsWith('/')
       }
       loadMode('theme')
       loadMode('font')
+
+      // Keep the browser chrome color in sync with the loaded theme
+      const themeColors = { light: '#f8f8f8', dark: '#161616', digital: '#001108' }
+      const theme = document.documentElement.dataset.theme
+      const themeMeta = document.querySelector('meta[name="theme-color"]')
+      if (themeMeta && themeColors[theme]) themeMeta.setAttribute('content', themeColors[theme])
     </script>
   </head>
   <body class={className}>
