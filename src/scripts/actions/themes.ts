@@ -1,20 +1,17 @@
+import { cycle } from '@scripts/utils/cycle'
+import { store } from '@scripts/utils/store'
+
 const themes = ['light', 'dark', 'digital']
 
+/** Switch to the next theme and remember it. */
 export function cycleThemes() {
-	const dataValue = document.documentElement.dataset.theme
-	const current = themes.indexOf(dataValue || '')
-	const nextValue = current < 0 ? themes[0] : themes[(current + 1) % themes.length]
-	document.documentElement.dataset.theme = nextValue
-	localStorage.setItem('theme', nextValue)
-	return nextValue
+	const next = cycle(themes, document.documentElement.dataset.theme)
+	store('theme', next)
+	return next
 }
 
-export function useTheme(theme: typeof themes[number]) {
+/** Apply a specific theme, ignoring unknown values. */
+export function useTheme(theme: string) {
 	if (!themes.includes(theme)) return
-	document.documentElement.dataset.theme = theme
-	localStorage.setItem('theme', theme)
-}
-
-export function getTheme() {
-	return document.documentElement.dataset.theme
+	store('theme', theme)
 }
