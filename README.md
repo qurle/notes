@@ -2,14 +2,14 @@
 
 ![Vercel](https://vercelbadge.vercel.app/api/qurle/notes?style=flat) ![Static Badge](https://img.shields.io/badge/badass-code-white?style=flat)
 
-Tiny [Astro](https://astro.build) site that turns a folder of files into your personal notes storage. Inspired by [type.baby](https://type.baby).
+Tiny [Astro](https://astro.build) site that turns a folder of files into your personal notes storage. Inspired by [type.](https://type.baby) [Get started →](#get-started)
 
 [![Look of notes homepage](.github/hero-image.png)](https://notes.qurle.net)
 
 ## How it works
 
 ### Drop a file, get a page
-No config, no database, no admin panel. Put a `.md`, `.mdx`, `.astro` or `.html` file into `src/pages/` — and it's published. That's it. That's the whole workflow.
+No config, no database, no admin panel. Put a `.md` `.mdx` `.astro` or `.html` file into `src/pages/` — and it's published. That's it. That's the whole workflow.
 
 ### Folders are pages too
 Nest your notes however your brain likes. Every folder becomes a navigable listing, generated automatically. Two notes or two hundred — the structure just follows you.
@@ -40,7 +40,7 @@ import NoteLayout from '@layouts/NoteLayout.astro'
 HTML pages are listed and served as-is, no styling applied. Raw and proud.
 
 ### React, Vue or Svelte
-Components run right inside notes, and it's simple: 
+Components run right inside notes: 
 1. Drop a `.tsx`, `.vue` or `.svelte` file into `src/components/`.
 2. Import and use it in any `.mdx` or `.astro` note. 
 3. Add [`client:load`](https://docs.astro.build/en/reference/directives-reference/#clientload) directive for interactive components.
@@ -75,7 +75,7 @@ npm run dev
 ```
 4. Open link from terminal (usually http://localhost:4321/)
 
-That's it. You're ready for deploy then.
+That's it. Replace `/src/pages` with your notes and you are ready for deploy.
 
 ### Make it yours
 Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root. No admin panel.
