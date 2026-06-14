@@ -23,5 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# other stuff
-.claude/
+# claude code: ship shared config + skills, keep everything else (incl. settings.local.json) local
+.claude/*
+!.claude/settings.json
+!.claude/skills/

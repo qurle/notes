@@ -4,6 +4,30 @@
 notes. — a tiny Astro static site that turns files in `src/pages/` into published
 pages and auto-generates folder listings. Static output, deployed to Vercel.
 
+A common use is a **store for LLM-generated artifacts**: clone the repo, drop generated
+files into `src/pages/`, and they're published as styled, navigable notes.
+
+## Saving an artifact (the most common task)
+Usually the job is: take a generated artifact and publish it as a note.
+
+1. **Location & name** — save it under `src/pages/`, optionally in a subfolder to group
+   related notes (folders become navigable listings automatically). Use **lowercase,
+   kebab-case** filenames, e.g. `quantum-notes.md`.
+2. **Pick the format by content:**
+   - Prose / docs / notes → **`.md`** — auto-styled, no frontmatter needed.
+   - Markdown that needs a component or JSX → **`.mdx`**.
+   - Interactive React / Vue / Svelte → put the component in `src/components/`
+     (`.tsx` / `.vue` / `.svelte`), then make an **`.mdx`** page that imports it and adds a
+     `client:*` directive. Plain `.md` **cannot** import components.
+   - A self-contained page that already has its own HTML/CSS → drop the **`.html`** file in
+     as-is; it's served raw and unstyled.
+   - A custom Astro page → **`.astro`**, wrapping content in `NoteLayout`.
+3. **Don't** hand-author folder index/listing pages — `src/pages/[...folder].astro`
+   generates them.
+4. To match the site's look, keep prose in `.md`/`.mdx` (inherits `NoteLayout`) and style
+   any components with the theme-aware CSS vars (see Conventions).
+5. Verify with `npm run dev` (preview) or `npm run build` (must compile cleanly).
+
 ## Commands
 - Requires Node >= 22.12 (see `package.json` engines), npm.
 - `npm i` — install deps
