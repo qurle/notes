@@ -45,9 +45,6 @@ import NoteLayout from '@layouts/NoteLayout.astro'
 
 HTML pages are listed and served as-is, no styling applied. Raw and proud.
 
-### Under the hood
-Fronted by [Astro](https://astro.build), deployed on [Vercel](https://vercel.com). Icons by [astro-icon](https://www.astroicon.dev/) with [Material Symbols](https://fonts.google.com/icons).
-
 ---
 ### How do I run it locally
 1. Install [Node](https://nodejs.org) (cause you need npm)
@@ -61,7 +58,7 @@ npm run dev
 4. Open link from terminal (usually http://localhost:4321/)
 
 ### Make it yours.
-Everything lives in one file — `notes.settings.jsonc` in the project root. No admin panel.
+Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root. No admin panel.
 
 | Setting | What it does |
 | --- | --- |
