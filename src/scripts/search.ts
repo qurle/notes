@@ -111,7 +111,7 @@ export function initSearch() {
 
 	document.addEventListener('keydown', (e) => {
 		// Cmd/Ctrl+F focuses the search box (overriding find-in-page)
-		if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+		if ((e.metaKey || e.ctrlKey) && e.code === 'KeyF' || e.code === 'Slash') {
 			e.preventDefault()
 			input.focus()
 			input.select()
