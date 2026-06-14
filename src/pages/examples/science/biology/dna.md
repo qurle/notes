@@ -5,6 +5,10 @@ title: DNA
 
 # DNA
 
+![DNA structure](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/DNA_Structure%2BKey%2BLabelled.pn_NoBB.png/1280px-DNA_Structure%2BKey%2BLabelled.pn_NoBB.png)
+
+*The double helix: antiparallel strands, complementary base pairs, and the sugar-phosphate backbone.*
+
 Deoxyribonucleic acid — the molecule that encodes the genetic instructions for all known life and most viruses. A double helix of two antiparallel strands, each a chain of nucleotides (adenine, thymine, guanine, cytosine) bonded to a sugar-phosphate backbone. A pairs with T, G pairs with C.
 
 The human genome: ~3.2 billion base pairs, ~20,000 protein-coding genes, packaged into 23 chromosome pairs. If you unspooled every strand of DNA from a single human cell, it would stretch about 2 metres. The ~37 trillion cells in the human body contain a combined ~74 billion km of DNA.

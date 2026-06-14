@@ -5,7 +5,7 @@ title: Pluto
 
 # Pluto
 
-![Pluto heart](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/1024px-Pluto_in_True_Color_-_High-Res.jpg)
+![Pluto heart](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/1280px-Pluto_in_True_Color_-_High-Res.jpg)
 
 Discovered in 1930 by Clyde Tombaugh at Lowell Observatory. Demoted from planet to dwarf planet by the IAU in 2006 — a decision that remains genuinely controversial among planetary scientists, if not astronomers generally.
 

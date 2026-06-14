@@ -5,6 +5,10 @@ title: Natural Selection
 
 # Natural Selection
 
+![Charles Darwin](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Charles_Darwin_seated_crop.jpg/1280px-Charles_Darwin_seated_crop.jpg)
+
+*Charles Darwin, who set out natural selection in* On the Origin of Species *(1859).*
+
 Darwin's mechanism. Four conditions, each necessary, together sufficient to produce evolution:
 
 1. **Variation** — individuals in a population differ from each other

@@ -99,12 +99,80 @@ Ed O'Brien's song — the only time a non-Thom composition led an album until *T
 
 ---
 
+## Runtime
+
+Every track to scale by length. Hover a bar for the detail — the album runs **53:30** across twelve songs, from the 1:57 jolt of *Fitter Happier* to the 6:23 suite of *Paranoid Android*.
+
+<p id="okc-readout" class="okc-readout">53 min 30 sec · 12 tracks · hover a bar</p>
+
+<div id="okc-chart">
+  <div class="okc-row" data-name="Airbag" data-time="4:44"><div class="okc-fill" style="width:74.2%"></div><div class="okc-content"><span class="okc-name">Airbag</span><span class="okc-time">4:44</span></div></div>
+  <div class="okc-row" data-name="Paranoid Android" data-time="6:23" data-tag="longest"><div class="okc-fill" style="width:100%"></div><div class="okc-content"><span class="okc-name">Paranoid Android</span><span class="okc-time">6:23</span></div></div>
+  <div class="okc-row" data-name="Subterranean Homesick Alien" data-time="4:27"><div class="okc-fill" style="width:69.7%"></div><div class="okc-content"><span class="okc-name">Subterranean Homesick Alien</span><span class="okc-time">4:27</span></div></div>
+  <div class="okc-row" data-name="Exit Music (For a Film)" data-time="4:24"><div class="okc-fill" style="width:68.9%"></div><div class="okc-content"><span class="okc-name">Exit Music (For a Film)</span><span class="okc-time">4:24</span></div></div>
+  <div class="okc-row" data-name="Let Down" data-time="4:59"><div class="okc-fill" style="width:78.1%"></div><div class="okc-content"><span class="okc-name">Let Down</span><span class="okc-time">4:59</span></div></div>
+  <div class="okc-row" data-name="Karma Police" data-time="4:21"><div class="okc-fill" style="width:68.1%"></div><div class="okc-content"><span class="okc-name">Karma Police</span><span class="okc-time">4:21</span></div></div>
+  <div class="okc-row" data-name="Fitter Happier" data-time="1:57" data-tag="shortest"><div class="okc-fill" style="width:30.5%"></div><div class="okc-content"><span class="okc-name">Fitter Happier</span><span class="okc-time">1:57</span></div></div>
+  <div class="okc-row" data-name="Electioneering" data-time="3:50"><div class="okc-fill" style="width:60.1%"></div><div class="okc-content"><span class="okc-name">Electioneering</span><span class="okc-time">3:50</span></div></div>
+  <div class="okc-row" data-name="Climbing Up the Walls" data-time="4:45"><div class="okc-fill" style="width:74.4%"></div><div class="okc-content"><span class="okc-name">Climbing Up the Walls</span><span class="okc-time">4:45</span></div></div>
+  <div class="okc-row" data-name="No Surprises" data-time="3:48"><div class="okc-fill" style="width:59.5%"></div><div class="okc-content"><span class="okc-name">No Surprises</span><span class="okc-time">3:48</span></div></div>
+  <div class="okc-row" data-name="Lucky" data-time="4:28"><div class="okc-fill" style="width:70%"></div><div class="okc-content"><span class="okc-name">Lucky</span><span class="okc-time">4:28</span></div></div>
+  <div class="okc-row" data-name="The Tourist" data-time="5:24"><div class="okc-fill" style="width:84.6%"></div><div class="okc-content"><span class="okc-name">The Tourist</span><span class="okc-time">5:24</span></div></div>
+</div>
+
+<style set:html={`
+  #okc-chart { display: flex; flex-direction: column; gap: var(--space-s); }
+  #okc-chart .okc-row { position: relative; height: 2rem; border-radius: var(--radius-m); background: var(--color-main-05); overflow: hidden; cursor: default; }
+  #okc-chart .okc-fill { position: absolute; inset: 0 auto 0 0; background: var(--color-main-15); transition: width 700ms var(--transition-easing), background var(--transition-s); }
+  #okc-chart .okc-content { position: relative; display: flex; justify-content: space-between; align-items: center; gap: var(--space-m); height: 100%; padding: 0 var(--space-l); font-size: var(--font-size-xs); }
+  #okc-chart .okc-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #okc-chart .okc-time { color: var(--color-main-50); font-variant-numeric: tabular-nums; }
+  #okc-chart .okc-row:hover .okc-fill, #okc-chart .okc-row.is-active .okc-fill { background: var(--color-main-25); }
+  .okc-readout { font-size: var(--font-size-xs); color: var(--color-main-50); }
+`} />
+
+<script set:html={`
+  (function () {
+    var chart = document.getElementById('okc-chart');
+    var readout = document.getElementById('okc-readout');
+    if (!chart) return;
+    var rows = chart.querySelectorAll('.okc-row');
+    var base = readout.textContent;
+
+    // grow the bars from zero on first paint
+    rows.forEach(function (row) {
+      var fill = row.querySelector('.okc-fill');
+      var target = fill.style.width;
+      fill.style.width = '0';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { fill.style.width = target; });
+      });
+    });
+
+    rows.forEach(function (row) {
+      row.addEventListener('mouseenter', function () {
+        rows.forEach(function (r) { r.classList.remove('is-active'); });
+        row.classList.add('is-active');
+        var tag = row.getAttribute('data-tag');
+        readout.textContent =
+          row.getAttribute('data-name') + ' — ' + row.getAttribute('data-time') +
+          (tag ? ' · ' + tag : '');
+      });
+    });
+    chart.addEventListener('mouseleave', function () {
+      rows.forEach(function (r) { r.classList.remove('is-active'); });
+      readout.textContent = base;
+    });
+  })();
+`} />
+
+---
+
 ## Watch
 
 <iframe
   width="100%"
-  height="360"
-  src="https://www.youtube.com/embed/XFkzRNyygfk"
+  src="https://www.youtube.com/embed/fHiGbolFFGw"
   title="Paranoid Android — Radiohead"
   frameborder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -1,18 +1,18 @@
 # Intro to notes.
 
-Welcome to notes, a tiny [Astro](https://astro.build) site that turns a folder of files into pages. You're reading one right now. And you can [build your own](https://github.com/qurle/notes#get-started). Cause it's
+Welcome to notes, a tiny [Astro](https://astro.build) site that turns a folder of files into pages. You're reading one right now. And you can [build your own](https://github.com/qurle/notes#get-started). Why?
 
 **Simple**\
 Drop a file, get a page. No config, no database, no frontmatter.
 
-**Keyboardy**\
-Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
-
 **Scalable**\
 Nest folders as deep as your brain likes — the structure follows automatically.
 
+**Keyboardy**\
+Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
+
 **Free and open source**\
-Grab your own copy [on GitHub > > > > >](https://github.com/qurle/notes)
+Grab your own copy [on GitHub](https://github.com/qurle/notes)
 
 ### How it works
 

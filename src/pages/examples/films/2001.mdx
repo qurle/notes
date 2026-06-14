@@ -11,7 +11,7 @@ Released April 1968. Directed by Stanley Kubrick. Screenplay by Kubrick and Arth
 
 <iframe
   width="100%"
-  height="360"
+  height="auto"
   src="https://www.youtube.com/embed/e-QFj59PON4"
   title="Also Sprach Zarathustra — 2001: A Space Odyssey"
   frameborder="0"
@@ -50,6 +50,89 @@ Discovery One carries five crew: Dr. David Bowman, Dr. Frank Poole, and three sc
 Alone, Bowman reaches Jupiter and finds a third monolith in orbit. He enters it in an EVA pod and is transported through a "Stargate" — a corridor of alien light and impossible landscapes. He arrives in a Louis XVI room, observes himself age through several stages of life, and dies in a bed as an old man. The monolith stands before him. He is reborn as the Star Child — an infant in a transparent sphere, orbiting Earth.
 
 </details>
+
+---
+
+## The Stargate
+
+Kubrick and Douglas Trumbull built Bowman's corridor of light with *slit-scan* photography — exposing each frame through a moving slit, one at a time, for months. A cheap real-time approximation of the same headlong rush:
+
+<canvas id="stargate" width="700" height="380" style="width:100%;display:block;border-radius:var(--radius-l);border:1px solid var(--color-main-15);background:var(--color-background);"></canvas>
+
+<div class="sg-controls">
+  <button id="sg-toggle" class="button" type="button">Pause</button>
+  <input id="sg-speed" type="range" min="1" max="20" step="1" value="8" />
+</div>
+
+<style set:html={`
+  .sg-controls { display: flex; justify-content: space-between; gap: var(--space-l); align-items: center; margin-top: var(--space-m); font-size: var(--font-size-xs); color: var(--color-main-50); }
+`} />
+
+<script set:html={`
+  (function () {
+    var canvas = document.getElementById('stargate');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width, H = canvas.height, cx = W / 2, cy = H / 2;
+
+    var rootStyle = getComputedStyle(document.documentElement);
+    var col = { main: '#fff', bg: '#000' };
+    function refresh() {
+      col.main = rootStyle.getPropertyValue('--color-main').trim() || '#fff';
+      col.bg = rootStyle.getPropertyValue('--color-background').trim() || '#000';
+    }
+    refresh();
+    new MutationObserver(refresh).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    var N = 420, stars = [];
+    function reset(s, fresh) {
+      s.x = (Math.random() - 0.5) * W;
+      s.y = (Math.random() - 0.5) * H;
+      s.z = fresh ? Math.random() * W : W;
+      s.pz = s.z;
+    }
+    for (var i = 0; i < N; i++) { var s = {}; reset(s, true); stars.push(s); }
+
+    var speed = 8, running = true;
+    ctx.fillStyle = col.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    function frame() {
+      ctx.globalAlpha = 0.28;
+      ctx.fillStyle = col.bg;
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = col.main;
+      for (var i = 0; i < N; i++) {
+        var s = stars[i];
+        s.pz = s.z;
+        s.z -= speed;
+        if (s.z < 1) { reset(s, false); }
+        var sx = cx + (s.x / s.z) * W;
+        var sy = cy + (s.y / s.z) * W;
+        var px = cx + (s.x / s.pz) * W;
+        var py = cy + (s.y / s.pz) * W;
+        ctx.lineWidth = Math.max(0.4, (1 - s.z / W) * 2.4);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(sx, sy);
+        ctx.stroke();
+      }
+      if (running) requestAnimationFrame(frame);
+    }
+    frame();
+
+    var toggle = document.getElementById('sg-toggle');
+    toggle.addEventListener('click', function () {
+      running = !running;
+      toggle.textContent = running ? 'Pause' : 'Play';
+      if (running) frame();
+    });
+    document.getElementById('sg-speed').addEventListener('input', function (e) {
+      speed = parseInt(e.target.value, 10);
+    });
+  })();
+`} />
 
 ---
 

@@ -5,6 +5,10 @@ title: Mercury
 
 # Mercury
 
+![Mercury in enhanced colour](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Mercury_in_color_-_Prockter07-edit1.jpg/1280px-Mercury_in_color_-_Prockter07-edit1.jpg)
+
+*Mercury in enhanced colour, imaged by NASA's MESSENGER orbiter.*
+
 The innermost planet. A world of extremes: surface temperatures swing from −180°C at night to 430°C during the day — a wider range than any other planet — because it has almost no atmosphere to retain heat.
 
 A Mercurian day (sunrise to sunrise) is longer than its year. It rotates exactly 3 times for every 2 orbits — a 3:2 spin-orbit resonance locked in by solar tidal forces billions of years ago. This was only confirmed in 1965 by radar; before that, astronomers assumed it was tidally locked with one face always toward the Sun.

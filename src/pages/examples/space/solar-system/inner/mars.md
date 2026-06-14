@@ -5,7 +5,7 @@ title: Mars
 
 # Mars
 
-![Mars from MRO](https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1024px-OSIRIS_Mars_true_color.jpg)
+![Mars in true colour](https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/1280px-OSIRIS_Mars_true_color.jpg)
 
 The most visited planet beyond Earth. As of 2024: 50 missions attempted, ~26 successful. Currently active: Curiosity rover (2012–), Perseverance rover (2021–), Ingenuity helicopter (2021–2024), MAVEN orbiter, MRO, Odyssey, Mars Express, Tianwen-1, Hope orbiter.
 

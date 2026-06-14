@@ -5,6 +5,10 @@ title: Special Relativity
 
 # Special Relativity
 
+![Albert Einstein](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/1280px-Albert_Einstein_Head.jpg)
+
+*Albert Einstein, who published special relativity in 1905.*
+
 Published by Einstein in 1905 in *Annalen der Physik*. Two postulates:
 
 1. The laws of physics are the same in all inertial (non-accelerating) reference frames.

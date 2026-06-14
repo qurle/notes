@@ -5,6 +5,10 @@ title: Aphex Twin
 
 # Aphex Twin
 
+![Aphex Twin performing in 2008](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Aphex_Twin%2C_2008.jpg/1280px-Aphex_Twin%2C_2008.jpg)
+
+*Richard D. James performing as Aphex Twin, 2008.*
+
 Richard D. James, born 1971, Limerick. Producer, composer, provocateur. The most influential figure in electronic music of the 1990s and possibly since. Operates under many aliases: Aphex Twin, AFX, Polygon Window, Caustic Window, The Tuss, and others — each with a distinct character.
 
 ---

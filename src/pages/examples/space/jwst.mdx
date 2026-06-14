@@ -5,9 +5,73 @@ title: James Webb Space Telescope
 
 # James Webb Space Telescope
 
-![JWST First Deep Field](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Webb%27s_First_Deep_Field_%28NIRCam_Image%29_%28rotated_90%C2%B0%29.jpg/1280px-Webb%27s_First_Deep_Field_%28NIRCam_Image%29_%28rotated_90%C2%B0%29.jpg)
+![JWST First Deep Field](https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg)
 
 *Webb's First Deep Field* — galaxy cluster SMACS 0723, 4.6 billion light-years away. This patch of sky is roughly the size of a grain of sand held at arm's length. Every smear of light is an entire galaxy.
+
+---
+
+## Gallery
+
+Click a thumbnail to bring it up full-size.
+
+<div id="jwst-gallery">
+  <figure class="jg-main">
+    <img id="jg-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pillars%20of%20Creation%20%28NIRCam%20Image%29.jpg?width=1100" alt="JWST image" />
+    <figcaption id="jg-cap">Pillars of Creation — Eagle Nebula, 6,500 ly</figcaption>
+  </figure>
+  <div class="jg-thumbs">
+    <button type="button" class="jg-thumb" data-full="https://commons.wikimedia.org/wiki/Special:FilePath/Webb%27s%20First%20Deep%20Field.jpg?width=1100" data-cap="Webb's First Deep Field — galaxy cluster SMACS 0723, 4.6 billion ly">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Webb%27s%20First%20Deep%20Field.jpg?width=220" alt="Webb's First Deep Field" loading="lazy" />
+    </button>
+    <button type="button" class="jg-thumb is-active" data-full="https://commons.wikimedia.org/wiki/Special:FilePath/Pillars%20of%20Creation%20%28NIRCam%20Image%29.jpg?width=1100" data-cap="Pillars of Creation — Eagle Nebula, 6,500 ly">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pillars%20of%20Creation%20%28NIRCam%20Image%29.jpg?width=220" alt="Pillars of Creation" loading="lazy" />
+    </button>
+    <button type="button" class="jg-thumb" data-full="https://commons.wikimedia.org/wiki/Special:FilePath/NASA%E2%80%99s%20Webb%20Reveals%20Cosmic%20Cliffs%2C%20Glittering%20Landscape%20of%20Star%20Birth.jpg?width=1100" data-cap="Cosmic Cliffs — edge of NGC 3324, Carina Nebula, 7,600 ly">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NASA%E2%80%99s%20Webb%20Reveals%20Cosmic%20Cliffs%2C%20Glittering%20Landscape%20of%20Star%20Birth.jpg?width=220" alt="Cosmic Cliffs" loading="lazy" />
+    </button>
+    <button type="button" class="jg-thumb" data-full="https://commons.wikimedia.org/wiki/Special:FilePath/Stephan%27s%20Quintet%20taken%20by%20James%20Webb%20Space%20Telescope.jpg?width=1100" data-cap="Stephan's Quintet — compact galaxy group, 290 Mly">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stephan%27s%20Quintet%20taken%20by%20James%20Webb%20Space%20Telescope.jpg?width=220" alt="Stephan's Quintet" loading="lazy" />
+    </button>
+    <button type="button" class="jg-thumb" data-full="https://commons.wikimedia.org/wiki/Special:FilePath/Southern%20Ring%20Nebula%20by%20Webb%20Telescope%20%282022%29.jpg?width=1100" data-cap="Southern Ring Nebula — dying star and white dwarf, 2,500 ly">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Southern%20Ring%20Nebula%20by%20Webb%20Telescope%20%282022%29.jpg?width=220" alt="Southern Ring Nebula" loading="lazy" />
+    </button>
+    <button type="button" class="jg-thumb" data-full="https://commons.wikimedia.org/wiki/Special:FilePath/Tarantula%20Nebula%20by%20JWST.jpg?width=1100" data-cap="Tarantula Nebula — R136 cluster, Large Magellanic Cloud, 161,000 ly">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tarantula%20Nebula%20by%20JWST.jpg?width=220" alt="Tarantula Nebula" loading="lazy" />
+    </button>
+  </div>
+</div>
+
+<style set:html={`
+  #jwst-gallery { margin: var(--space-xl) 0; }
+  #jwst-gallery .jg-main { margin: 0; }
+  #jwst-gallery .jg-main img { width: 100%; display: block; border-radius: var(--radius-l); border: 1px solid var(--color-main-15); background: var(--color-main-05); }
+  #jwst-gallery figcaption { font-size: var(--font-size-xs); color: var(--color-main-50); margin-top: var(--space-m); text-align: center; }
+  #jwst-gallery .jg-thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-m); margin-top: var(--space-l); }
+  #jwst-gallery .jg-thumb { padding: 0; border: 2px solid transparent; border-radius: var(--radius-m); background: none; cursor: pointer; overflow: hidden; line-height: 0; opacity: 0.5; transition: opacity var(--transition-s), border-color var(--transition-s); }
+  #jwst-gallery .jg-thumb img { width: 100%; height: 3.25rem; object-fit: cover; display: block; }
+  #jwst-gallery .jg-thumb:hover { opacity: 1; }
+  #jwst-gallery .jg-thumb.is-active { opacity: 1; border-color: var(--color-main); }
+  @media (max-width: 640px) { #jwst-gallery .jg-thumbs { grid-template-columns: repeat(3, 1fr); } }
+`} />
+
+<script set:html={`
+  (function () {
+    var root = document.getElementById('jwst-gallery');
+    if (!root) return;
+    var img = document.getElementById('jg-img');
+    var cap = document.getElementById('jg-cap');
+    var thumbs = root.querySelectorAll('.jg-thumb');
+    thumbs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        img.src = btn.getAttribute('data-full');
+        cap.textContent = btn.getAttribute('data-cap');
+        thumbs.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+      });
+    });
+  })();
+`} />
 
 ---
 

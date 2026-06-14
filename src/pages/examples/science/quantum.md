@@ -5,6 +5,10 @@ title: Quantum Computing
 
 # Quantum Computing
 
+![Bloch sphere](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Bloch_Sphere.svg/1280px-Bloch_Sphere.svg.png)
+
+*The Bloch sphere — a geometric representation of a single qubit's state.*
+
 Quantum computers exploit superposition and entanglement to perform computations that would be intractable for classical machines. Not faster at everything — specifically powerful for factoring, search, and simulating quantum systems.
 
 ## Qubits

@@ -5,6 +5,10 @@ title: David Lynch
 
 # David Lynch
 
+![David Lynch](https://upload.wikimedia.org/wikipedia/commons/0/00/David_Lynch_Cannes_2017.jpg)
+
+*David Lynch at the Cannes Film Festival, 2017.*
+
 1946–2025. Painter, musician, coffee obsessive, and the director most responsible for making "surreal" a useful critical adjective in film. Born in Missoula, Montana; raised across America; studied painting at the Pennsylvania Academy of Fine Arts. *Eraserhead* took five years to shoot, mostly at night on the AFI campus.
 
 ---

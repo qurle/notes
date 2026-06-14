@@ -5,6 +5,10 @@ title: Post-Rock
 
 # Post-Rock
 
+![Mogwai live at the Royal Festival Hall, 2014](https://upload.wikimedia.org/wikipedia/commons/3/3d/Mogwai_%28band%29_live_RFH_2014.jpg)
+
+*Mogwai performing at the Royal Festival Hall, London, 2014.*
+
 A genre that uses the instrumentation of rock — electric guitar, bass, drums — to achieve ends traditionally associated with classical or electronic music: texture, atmosphere, dynamics, narrative arc, without vocals. The term was coined by critic Simon Reynolds in 1994 reviewing Talk Talk's *Laughing Stock* (1991).
 
 ---
