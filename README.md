@@ -81,6 +81,8 @@ npm run dev
 
 That's it. Replace `src/pages` content with your own notes and you are ready to deploy.
 
+**Keep one file, though:** `src/pages/[...folder].astro` is what generates every folder listing. Swap your notes in around it — delete it and the navigation goes with it.
+
 ### Make it yours
 Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root.
 
