@@ -39,15 +39,16 @@ import NoteLayout from '@layouts/NoteLayout.astro'
 
 HTML pages are listed and served as-is, no styling applied. Raw and proud.
 
-### React, Vue or Svelte
+### Frameworks included
 Components run right inside notes: 
-1. Drop a `.tsx`, `.vue` or `.svelte` file into `src/components/`.
-2. Import and use it in any `.mdx` or `.astro` note. 
-3. Add [`client:load`](https://docs.astro.build/en/reference/directives-reference/#clientload) directive for interactive components.
+1. Drop a `.tsx` `.vue` `.svelte` or `astro` file into `src/components/`
+2. Import and use it in any `.mdx` or `.astro` note 
+3. Add [`client:load`](https://docs.astro.build/en/reference/directives-reference/#clientload) directive for interactive components
 
 ```mdx
 import Counter from '@components/Counter'
 
+# I can count!
 <Counter client:load />
 ```
 
@@ -75,7 +76,7 @@ npm run dev
 ```
 4. Open link from terminal (usually http://localhost:4321/)
 
-That's it. Replace `/src/pages` with your notes and you are ready for deploy.
+That's it. Replace `src/pages` content with your own notes and you are ready for deploy.
 
 ### Make it yours
 Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root. No admin panel.

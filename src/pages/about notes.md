@@ -1,6 +1,6 @@
 # Intro to notes.
 
-Welcome to notes, a tiny [Astro](https://astro.build) site that turns a folder of files into pages. You're reading one right now.
+Welcome to notes, a tiny [Astro](https://astro.build) site that turns a folder of files into pages. You're reading one right now. And you can [build your own](https://github.com/qurle/notes#get-started). Cause it's
 
 **Simple**\
 Drop a file, get a page. No config, no database, no frontmatter.
@@ -20,5 +20,7 @@ Drop any `.md` `.mdx` `.astro` or `.html` file into `src/pages/` and it's publis
 
 Markdown and MDX are styled out of the box. Astro pages just need a wrap in `NoteLayout`. HTML pages are served as-is — raw and proud.
 
-That's about it.\
+You can also put Astro, React, Vue and Svelte [components](https://github.com/qurle/notes#frameworks-included) into `src/components` and import them in `.astro` and `.mdx` files.
+
+That's about it. [Get started →](https://github.com/qurle/notes#get-started)\
     _- qurle_
