@@ -45,6 +45,9 @@
       ],
       "@scripts/*": [
         "./src/scripts/*"
+      ],
+      "@settings": [
+        "./notes.settings.jsonc"
       ]
     },
   }

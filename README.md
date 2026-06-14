@@ -5,7 +5,6 @@
 Tiny [Astro](https://astro.build) site that turns a folder of files into your personal notes storage. Inspired by [type.baby](https://type.baby).
 
 ![Look of notes homepage](.github/hero-image.png)
-<!-- TODO: add hero screenshot to .github/hero-image.png -->
 
 ### Drop a file, get a page
 No config, no database, no admin panel. Put a `.md`, `.mdx`, `.astro` or `.html` file into `src/pages/` — and it's published. That's it. That's the whole workflow.
@@ -38,11 +37,10 @@ src/pages/
 ### Hands on keyboard
 Browse like it's a file manager. Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
 
-### Make it yours
+### Pick the right style
 Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find the look that feels like home. Your choice is remembered.
 
 ![Example of switching font and theme](.github/appearance.png)
-<!-- TODO: add appearance screenshot to .github/appearance.png -->
 
 ### Any content you like
 Markdown and MDX are styled automatically, zero extra steps. Astro pages get the same look — just wrap them in `NoteLayout`:
@@ -61,11 +59,11 @@ Fronted by [Astro](https://astro.build), deployed on [Vercel](https://vercel.com
 
 ---
 ### How do I run it locally
-1. Install [Node.js](https://nodejs.org) v22.12.0 or newer (cause you need npm)
+1. Install [Node.js](https://nodejs.org) (cause you need npm)
 2. Download repository
 3. Open terminal and run this
 ```bash
-cd <path to folder of notes>
+cd <path to folder of notes.>
 npm i
 npm run dev
 ```
@@ -73,18 +71,18 @@ npm run dev
 
 **Want to tweak it?** Styles live in `src/styles/`, folder page logic — in `src/pages/[...folder].astro`.
 
-### Keep it private — or share it
-Your notes are **hidden from search engines by default**. notes. ships a `site.config.json` in the project root:
+### Make it yours.
+Everything lives in one file — `notes.settings.jsonc` in the project root. No admin panel.
 
-```json
-{
-  "indexable": false
-}
-```
+| Setting | What it does |
+| --- | --- |
+| `title` | Your site's name — the browser tab and the title suffix |
+| `description` | Default page description, for meta tags and link previews |
+| `appearance` | Starting `theme` / `font` and whether their switcher buttons show |
+| `indexable` | `false` tags every page `noindex` so search engines skip it — flip to `true` to go public |
+| `footer` | Show / hide the footer and set its links |
 
-While `indexable` stays `false`, every page gets a `noindex` tag so crawlers skip it. Ready to go public? Flip it to `true` and redeploy.
-
-One caveat: this only hides you from search — everything in `src/pages/` is still served to anyone who has the link. Keep truly private things out of the repo.
+**One privacy caveat:** `indexable` only hides you from search — everything in `src/pages/` is still served to anyone who has the link. Keep truly private things out of the repo.
 
 ---
 Designed and developed by [qurle](https://qurle.net). Inspired by [type.baby](https://type.baby).

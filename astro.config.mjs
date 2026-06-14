@@ -4,6 +4,7 @@ import path from 'path'
 import icon from 'astro-icon'
 import mdx from '@astrojs/mdx'
 import { unified } from '@astrojs/markdown-remark'
+import json5Plugin from "vite-plugin-json5"
 
 import { autoNoteLayout } from './src/remark-plugins/auto-doc-layout.mjs'
 
@@ -24,6 +25,7 @@ export default defineConfig({
     },
     // Cause tsconfig is not fucking enough???
     vite: {
+        plugins: [json5Plugin()],
         resolve: {
             alias: {
                 '@styles': path.resolve('./src/styles'),

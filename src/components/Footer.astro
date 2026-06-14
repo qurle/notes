@@ -1,9 +1,19 @@
 ---
-const { text = 'qurle', link = 'https://qurle.net' } = Astro.props
+import settings from '@settings'
 ---
 
 <footer>
-  <a href={link} target="_blank">{text}</a>
+  {
+    settings.footer.content.map((content) =>
+      content.href ? (
+        <a href={content.href} target={content.target}>
+          {content.label}
+        </a>
+      ) : (
+        <span>{content.label}</span>
+      ),
+    )
+  }
 </footer>
 <style>
   footer {
@@ -11,10 +21,14 @@ const { text = 'qurle', link = 'https://qurle.net' } = Astro.props
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-block-start: var(--space-3xl);
+    padding-block-start: var(--space-4xl);
 
+    span,
     a {
       color: var(--color-main-15);
+      &:not(:first-child)::before {
+        content: ' · ';
+      }
     }
   }
 </style>

@@ -1,13 +1,13 @@
 ---
 import Icons from '@components/utils/Icons.astro'
 import '@styles/global.sass'
-import config from '../../site.config.json'
+import settings from '@settings'
 
-const defaultTitle = 'notes.'
+const defaultTitle = settings.title
 const {
   title = defaultTitle,
   simpleTitle = false,
-  description = 'simple astro storage',
+  description = settings.description,
   class: className,
 } = Astro.props
 
@@ -21,13 +21,17 @@ const base = Astro.url.pathname.endsWith('/')
 ---
 
 <!doctype html>
-<html lang="en" data-font="serif" data-theme="light">
+<html
+  lang="en"
+  data-font={settings.appearance.font.default}
+  data-theme={settings.appearance.theme.default}
+>
   <head>
     <base href={base} target="_self" />
     <meta charset="UTF-8" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    {!config.indexable && <meta name="robots" content="noindex, nofollow" />}
+    {!settings.indexable && <meta name="robots" content="noindex, nofollow" />}
     <meta
       name="viewport"
       content="width=device-width initial-scale=1 interactive-widget=resizes-content"
@@ -59,10 +63,15 @@ const base = Astro.url.pathname.endsWith('/')
       loadMode('font')
 
       // Keep the browser chrome color in sync with the loaded theme
-      const themeColors = { light: '#f8f8f8', dark: '#161616', digital: '#001108' }
+      const themeColors = {
+        light: '#f8f8f8',
+        dark: '#161616',
+        digital: '#001108',
+      }
       const theme = document.documentElement.dataset.theme
       const themeMeta = document.querySelector('meta[name="theme-color"]')
-      if (themeMeta && themeColors[theme]) themeMeta.setAttribute('content', themeColors[theme])
+      if (themeMeta && themeColors[theme])
+        themeMeta.setAttribute('content', themeColors[theme])
     </script>
   </head>
   <body class={className}>

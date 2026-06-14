@@ -32,12 +32,34 @@ export function initFolderNavigation() {
 	})
 
 	document.addEventListener('keydown', (e) => {
-		if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
-		e.preventDefault()
-		keyboardUsed = true
+		// Never hijack browser shortcuts (e.g. Cmd+J)
+		if (e.metaKey || e.ctrlKey || e.altKey) return
 
 		const current = document.activeElement as HTMLAnchorElement
-		const direction = e.key === 'ArrowDown' ? 'next' : 'prev'
-		cycle(links, current, direction).focus()
+		let target: HTMLAnchorElement | undefined
+
+		// Arrow keys, plus Vim motions (j/k to move, g/G to jump to ends)
+		switch (e.code) {
+			case 'ArrowDown':
+			case 'KeyJ':
+				target = cycle(links, current, 'next')
+				break
+			case 'ArrowUp':
+			case 'KeyK':
+				target = cycle(links, current, 'prev')
+				break
+			case 'KeyG':
+				target = links[0]
+				break
+			default:
+				return
+		}
+
+		if (e.shiftKey && e.code === 'KeyG')
+			target = links[links.length - 1]
+
+		e.preventDefault()
+		keyboardUsed = true
+		target.focus()
 	})
 }
