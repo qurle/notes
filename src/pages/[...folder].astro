@@ -11,6 +11,30 @@ export const allFiles = Object.keys(
   ),
 )
 
+// Global fuzzy-search dataset: every folder and page across the whole site,
+// with absolute hrefs and root-relative names. Identical on every page, so it's
+// built once here rather than per route.
+const searchFolders = unique(
+  allFiles
+    .map((path) => path.replace(/^\.\//, ''))
+    .filter((rel) => rel.includes('/'))
+    .flatMap((rel) =>
+      rel
+        .split('/')
+        .slice(0, -1)
+        .map((_, i, arr) => arr.slice(0, i + 1).join('/') + '/'),
+    ),
+)
+
+const searchItems = [
+  ...searchFolders.map((rel) => ({ name: rel, href: '/' + rel, type: 'folder' })),
+  ...allFiles.map((path) => ({
+    name: path.replace(/^\.\//, ''),
+    href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
+    type: 'page',
+  })),
+]
+
 export function getStaticPaths() {
   const folders = unique(
     allFiles
@@ -57,30 +81,6 @@ const pages = contents
     href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
     name: path.split('/').at(-1),
   }))
-
-// Every descendant folder and page (recursive), named by its path relative to
-// the current folder, mixed into one list for fuzzy search. The visible
-// listing above stays scoped to the immediate level.
-const searchFolders = unique(
-  contents
-    .map((path) => path.replace(currentPath, ''))
-    .filter((rel) => rel.includes('/'))
-    .flatMap((rel) =>
-      rel
-        .split('/')
-        .slice(0, -1)
-        .map((_, i, arr) => arr.slice(0, i + 1).join('/') + '/'),
-    ),
-)
-
-const searchItems = [
-  ...searchFolders.map((rel) => ({ name: rel, href: rel, type: 'folder' })),
-  ...contents.map((path) => ({
-    name: path.replace(currentPath, ''),
-    href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
-    type: 'page',
-  })),
-]
 ---
 
 <NoteLayout {title}>
@@ -90,7 +90,7 @@ const searchItems = [
       class="search-input"
       type="text"
       placeholder="search"
-      aria-label="Search this folder"
+      aria-label="Search all notes"
       autocomplete="off"
       spellcheck="false"
     />

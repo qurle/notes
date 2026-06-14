@@ -57,6 +57,9 @@ import Counter from '@components/Counter'
 ### Hands on keyboard
 Browse like it's a file manager. Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
 
+### Find anything
+Fuzzy-search every note across the whole site — from any folder.
+
 ### Pick the right style
 Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find the look that feels like home. Your choice is remembered.
 
