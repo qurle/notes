@@ -4,7 +4,7 @@
 
 Tiny [Astro](https://astro.build) site that turns a folder of files into your personal notes storage. Inspired by [type.](https://type.baby) [Get started →](#get-started)
 
-[![Look of notes homepage](.github/hero-image.png)](https://notes.qurle.net)
+[![Look of notes homepage](.github/hero-image.png?v1)](https://notes.qurle.net)
 
 ## How it works
 
