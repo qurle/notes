@@ -20,6 +20,7 @@ export default defineConfig({
                 'arrow-back',
                 'square-outline',
                 'circle-outline',
+                'close',
             ]
         }
     }), react(), vue(), svelte(), mdx()],

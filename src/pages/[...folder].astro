@@ -1,9 +1,8 @@
 ---
 import NoteLayout from '@layouts/NoteLayout.astro'
 import { unique } from '@scripts/utils/unique'
+import { Icon } from 'astro-icon/components'
 import settings from '@settings'
-
-const rootPageName = 'home/'
 
 export const allFiles = Object.keys(
   import.meta.glob<Record<string, any>>(
@@ -58,10 +57,47 @@ const pages = contents
     href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
     name: path.split('/').at(-1),
   }))
+
+// Every descendant folder and page (recursive), named by its path relative to
+// the current folder, mixed into one list for fuzzy search. The visible
+// listing above stays scoped to the immediate level.
+const searchFolders = unique(
+  contents
+    .map((path) => path.replace(currentPath, ''))
+    .filter((rel) => rel.includes('/'))
+    .flatMap((rel) =>
+      rel
+        .split('/')
+        .slice(0, -1)
+        .map((_, i, arr) => arr.slice(0, i + 1).join('/') + '/'),
+    ),
+)
+
+const searchItems = [
+  ...searchFolders.map((rel) => ({ name: rel, href: rel, type: 'folder' })),
+  ...contents.map((path) => ({
+    name: path.replace(currentPath, ''),
+    href: path.replace(/^\.(.+)\.[^.]+$/, '$1'),
+    type: 'page',
+  })),
+]
 ---
 
 <NoteLayout {title}>
   <h1>{title}</h1>
+  <div class="search">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="search"
+      aria-label="Search this folder"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" type="button" aria-label="Close search" hidden>
+      <Icon name="material-symbols:close" />
+    </button>
+  </div>
   <ul class="entries">
     {
       folders.map((path) => (
@@ -79,8 +115,15 @@ const pages = contents
       ))
     }
   </ul>
+  <script
+    type="application/json"
+    id="search-data"
+    set:html={JSON.stringify(searchItems)}
+  />
 </NoteLayout>
 <script>
   import { initFolderNavigation } from '@scripts/navigate'
+  import { initSearch } from '@scripts/search'
   initFolderNavigation()
+  initSearch()
 </script>
