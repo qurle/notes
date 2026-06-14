@@ -1,0 +1,27 @@
+import Scratchpad from '@components/scratchpad'
+
+# Frameworks
+
+Notes can run React, Vue or Svelte components.
+
+## Using a component
+
+This project already ships with React, Vue and Svelte installed, so you only need to:
+
+1. Add a component to `src/components/` (`.tsx`, `.vue` or `.svelte`)
+2. Import it in any `.mdx` or `.astro` note and add a directive:
+
+```mdx
+import Scratchpad from '@components/scratchpad'
+
+<Scratchpad client:visible />
+```
+
+Directives: `client:load` (now) · `client:visible` (on scroll) · `client:idle`
+(when free) · none (static HTML, zero JS).
+
+## Scratchpad
+
+A small React island — type and watch the count update:
+
+<Scratchpad client:visible />

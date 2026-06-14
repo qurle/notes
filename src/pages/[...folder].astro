@@ -1,6 +1,7 @@
 ---
 import NoteLayout from '@layouts/NoteLayout.astro'
 import { unique } from '@scripts/utils/unique'
+import settings from '@settings'
 
 const rootPageName = 'home/'
 
@@ -36,7 +37,7 @@ const { folder } = Astro.params
 const currentPath = folder ? `./${folder}/` : './'
 const currentFolder = folder?.split('/').at(-1)
 
-const title = folder ? currentFolder + '/' : rootPageName
+const title = folder ? currentFolder + '/' : settings.rootTitle
 
 const contents = allFiles.filter((path) => path.startsWith(currentPath))
 

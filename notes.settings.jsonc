@@ -1,4 +1,6 @@
 {
+	// Root folder name — the first heading you see in notes
+	"rootTitle": "notes.",
 	// Site name — shown in the browser tab and as the title suffix
 	"title": "notes.",
 	// Default description — used for the meta description and link previews

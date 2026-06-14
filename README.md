@@ -6,6 +6,8 @@ Tiny [Astro](https://astro.build) site that turns a folder of files into your pe
 
 [![Look of notes homepage](.github/hero-image.png)](https://notes.qurle.net)
 
+## How it works
+
 ### Drop a file, get a page
 No config, no database, no admin panel. Put a `.md`, `.mdx`, `.astro` or `.html` file into `src/pages/` — and it's published. That's it. That's the whole workflow.
 
@@ -25,14 +27,6 @@ src/pages/
         └── coffee.astro
 ```
 
-### Hands on keyboard
-Browse like it's a file manager. Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
-
-### Pick the right style
-Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find the look that feels like home. Your choice is remembered.
-
-![Example of switching font and theme](.github/appearance.png)
-
 ### Any content you like
 Markdown and MDX are styled automatically, zero extra steps. Astro pages get the same look — just wrap them in `NoteLayout`:
 
@@ -45,8 +39,32 @@ import NoteLayout from '@layouts/NoteLayout.astro'
 
 HTML pages are listed and served as-is, no styling applied. Raw and proud.
 
----
-### How do I run it locally
+### React, Vue or Svelte
+Components run right inside notes, and it's simple: 
+1. Drop a `.tsx`, `.vue` or `.svelte` file into `src/components/`.
+2. Import and use it in any `.mdx` or `.astro` note. 
+3. Add [`client:load`](https://docs.astro.build/en/reference/directives-reference/#clientload) directive for interactive components.
+
+```mdx
+import Counter from '@components/Counter'
+
+<Counter client:load />
+```
+
+## How it feels
+
+### Hands on keyboard
+Browse like it's a file manager. Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
+
+### Pick the right style
+Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find the look that feels like home. Your choice is remembered.
+
+![Example of switching font and theme](.github/appearance.png)
+
+
+## Build your own notes
+
+### Get started
 1. Install [Node](https://nodejs.org) (cause you need npm)
 2. Download repository
 3. Open terminal and run this
@@ -57,11 +75,14 @@ npm run dev
 ```
 4. Open link from terminal (usually http://localhost:4321/)
 
-### Make it yours.
+That's it. You're ready for deploy then.
+
+### Make it yours
 Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root. No admin panel.
 
 | Setting | What it does |
 | --- | --- |
+| `rootTitle` | The main heading on the root page of your site |
 | `title` | Your site's name — the browser tab and the title suffix |
 | `description` | Default page description, for meta tags and link previews |
 | `appearance` | Starting `theme` / `font` and whether their switcher buttons show |

@@ -8,6 +8,10 @@ import json5Plugin from "vite-plugin-json5"
 
 import { autoNoteLayout } from './src/remark-plugins/auto-doc-layout.mjs'
 
+import react from '@astrojs/react';
+import vue from '@astrojs/vue';
+import svelte from '@astrojs/svelte';
+
 // https://astro.build/config
 export default defineConfig({
     integrations: [icon({
@@ -18,7 +22,7 @@ export default defineConfig({
                 'circle-outline',
             ]
         }
-    }), mdx()],
+    }), react(), vue(), svelte(), mdx()],
     markdown: {
         syntaxHighlight: false,
         processor: unified({ remarkPlugins: [autoNoteLayout] }),

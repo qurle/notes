@@ -9,6 +9,7 @@ declare module '@settings' {
   }
 
   const config: {
+    rootTitle: string
     title: string
     description: string
     appearance: {
