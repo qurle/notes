@@ -1,3 +1,5 @@
+@use '@styles/mixins.sass' as *
+
 @layer ui
     // Hiding shortcuts on mobile
     @media not (hover: hover)
@@ -56,7 +58,7 @@
 
         transform: scale(1)
         transition: background-color var(--transition-m), transform var(--transition-s)
-        &:hover
+        @include hover
             background: var(--color-main-05)
         &:active
             transform: scale(.95)
@@ -92,8 +94,9 @@
                     inset: 0 calc(-1 * var(--space-l))
                     background: var(--color-main-05)
                     transition: transform var(--transition-s)
-                &:hover::before
-                    opacity: 1
+                @include hover
+                    &::before
+                        opacity: 1
                 &:focus-visible::before
                     opacity: 1
                     background: transparent

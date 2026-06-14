@@ -1,3 +1,5 @@
+@use '@styles/mixins.sass' as *
+
 header
     display: flex
     justify-content: space-between
@@ -31,7 +33,7 @@ header
             inset: calc(-1 * var(--space-m))
         &:focus-visible::before
             border-color: var(--color-main)
-        &:hover
+        @include hover
             opacity: .5
 
     svg

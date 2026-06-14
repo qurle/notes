@@ -17,6 +17,9 @@ Astro 6 · TypeScript · SASS (**indented `.sass` syntax, not `.scss`**) · MDX
 (`@astrojs/mdx`) · `astro-icon` (Material Symbols). Site config is JSON5 via
 `vite-plugin-json5`.
 
+UI-framework islands available out of the box: React 19, Vue 3, Svelte 5
+(`@astrojs/react` / `@astrojs/vue` / `@astrojs/svelte`).
+
 ## How content becomes pages
 - Any `.md`, `.mdx`, `.astro`, or `.html` in `src/pages/` is published. Folders nest into routes.
 - `.md` / `.mdx` automatically receive `NoteLayout` via the remark plugin
@@ -28,9 +31,19 @@ Astro 6 · TypeScript · SASS (**indented `.sass` syntax, not `.scss`**) · MDX
   `src/pages/[...folder].astro` — **don't hand-author index pages.**
 - `src/pages/examples/` is demo content shipped with the template, not real notes.
 
+## Framework components (islands)
+- React (`.tsx`), Vue (`.vue`), and Svelte (`.svelte`) all work. Drop the component into
+  `src/components/` and import it into any `.mdx` or `.astro` note.
+- Add a hydration directive to make it interactive: `client:load` (immediately),
+  `client:visible` (on scroll), `client:idle` (when free) — or omit it for static HTML
+  with zero JS.
+- Example: `src/components/scratchpad.tsx` (React island) used in
+  `src/pages/examples/frameworks.mdx`.
+
 ## Code layout
 - `src/layouts/` — `Layout.astro` (html shell, head/meta), `NoteLayout.astro` (header/footer wrapper)
-- `src/components/` — `Header.astro`, `Footer.astro`, `utils/Icons.astro`
+- `src/components/` — Astro + framework components: `Header.astro`, `Footer.astro`,
+  `utils/Icons.astro`, `scratchpad.tsx` (React island example)
 - `src/scripts/` — client-side TS: `navigate.ts` (keyboard nav), `actions/themes.ts`,
   `actions/fonts.ts`, `utils/` (cycle, store, getElements, unique)
 - `src/styles/` — SASS partials (reset, variables, global, blocks, ui, header, fonts, digital)
@@ -43,8 +56,12 @@ Astro 6 · TypeScript · SASS (**indented `.sass` syntax, not `.scss`**) · MDX
 - Site config lives in `notes.settings.jsonc` (JSON5 — comments allowed); import via
   `@settings`. Types in `notes.settings.d.ts`.
 - Syntax highlighting is intentionally disabled (`astro.config.mjs`).
-- Theme (light/dark/digital) and font (serif/mono/sans) prefs are stored client-side;
-  logic in `src/scripts/actions/`.
+- Theme (light/dark/digital) and font (serif/mono/sans) prefs are stored client-side and
+  applied as `data-theme` / `data-font` on `:root`; logic in `src/scripts/actions/`.
+- Style with the theme-aware CSS custom properties from `src/styles/variables.sass`
+  (e.g. `--color-main`, `--space-l`, `--radius-l`, `--font-main`) rather than hardcoded
+  values — this is what lets components react to theme/font switching. Applies to
+  framework islands too (see `scratchpad.tsx`).
 
 ## Watch out
 - Everything in `src/pages/` is publicly served once deployed. `indexable: false` only
