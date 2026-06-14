@@ -53,7 +53,7 @@ by `src/pages/[...folder].astro`.
    `NoteLayout`, and style any component with the theme-aware CSS custom properties from
    `src/styles/variables.sass` (`--color-main`, `--space-l`, `--radius-l`, `--font-main`, …)
    rather than hardcoded values — that's what lets it follow the light/dark/digital themes.
-   `src/components/scratchpad.tsx` is a worked example.
+   `src/components/examples/scratchpad.tsx` is a worked example.
 
 5. **Verify.** Run `npm run build` (must compile cleanly), or `npm run dev` to preview at
    the new route.

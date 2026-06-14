@@ -61,13 +61,13 @@ UI-framework islands available out of the box: React 19, Vue 3, Svelte 5
 - Add a hydration directive to make it interactive: `client:load` (immediately),
   `client:visible` (on scroll), `client:idle` (when free) — or omit it for static HTML
   with zero JS.
-- Example: `src/components/scratchpad.tsx` (React island) used in
+- Example: `src/components/examples/scratchpad.tsx` (React island) used in
   `src/pages/examples/frameworks.mdx`.
 
 ## Code layout
 - `src/layouts/` — `Layout.astro` (html shell, head/meta), `NoteLayout.astro` (header/footer wrapper)
 - `src/components/` — Astro + framework components: `Header.astro`, `Footer.astro`,
-  `utils/Icons.astro`, `scratchpad.tsx` (React island example)
+  `utils/Icons.astro`, `examples/scratchpad.tsx` (React island example)
 - `src/scripts/` — client-side TS: `navigate.ts` (keyboard nav), `actions/themes.ts`,
   `actions/fonts.ts`, `utils/` (cycle, store, getElements, unique)
 - `src/styles/` — SASS partials (reset, variables, global, blocks, ui, header, fonts, digital)
