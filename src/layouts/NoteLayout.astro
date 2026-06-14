@@ -2,6 +2,7 @@
 import Layout from '@layouts/Layout.astro'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
+import settings from '@settings'
 
 const {
   frontmatter,
@@ -22,5 +23,5 @@ const { backUrl = isRoot ? undefined : '../' } = headerConfig
   <main class="blocks">
     <slot />
   </main>
-  <Footer />
+  {settings.footer.show && <Footer />}
 </Layout>

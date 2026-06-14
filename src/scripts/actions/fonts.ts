@@ -1,29 +1,17 @@
+import { cycle } from '@scripts/utils/cycle'
+import { store } from '@scripts/utils/store'
+
 const fonts = ['serif', 'mono', 'sans']
-let font: typeof fonts[number]
 
-export function getFont() {
-	if (font === undefined) initFont()
-	return font
-}
-
-export function initFont() {
-	font = loadFont() || fonts[0]
-}
-
-function loadFont() {
-	return document.documentElement.dataset.font
-}
-
+/** Switch to the next font and remember it. */
 export function cycleFonts() {
-	const dataValue = document.documentElement.dataset.font
-	const current = fonts.indexOf(dataValue || '')
-	const nextFont = current < 0 ? fonts[0] : fonts[(current + 1) % fonts.length]
-	useFont(nextFont)
+	const next = cycle(fonts, document.documentElement.dataset.font)
+	store('font', next)
+	return next
 }
 
-export function useFont(font: typeof fonts[number]) {
+/** Apply a specific font, ignoring unknown values. */
+export function useFont(font: string) {
 	if (!fonts.includes(font)) return
-	document.documentElement.dataset.font = font
-	localStorage.setItem('font', font)
+	store('font', font)
 }
-

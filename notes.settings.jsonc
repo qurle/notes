@@ -1,0 +1,41 @@
+{
+	// Site name — shown in the browser tab and as the title suffix
+	"title": "notes.",
+	// Default description — used for the meta description and link previews
+	"description": "simple astro storage",
+	// Default look, and whether visitors can switch it
+	"appearance": {
+		"theme": {
+			// Show the theme switcher button
+			"switch": true,
+			// Starting theme: light | dark | digital
+			"default": "light"
+		},
+		"font": {
+			// Show the font switcher button
+			"switch": true,
+			// Starting font: serif | mono | sans
+			"default": "serif"
+		}
+	},
+	// Show in search engines
+	"indexable": false,
+	// Footer settings
+	"footer": {
+		// Show the footer
+		"show": true,
+		// Text (or links) in the footer	
+		"content": [
+			{
+				"label": "qurle",
+				"href": "https://qurle.net",
+				"target": "_blank"
+			},
+			{
+				"label": "github",
+				"href": "https://github.com/qurle/notes",
+				"target": "_blank"
+			}
+		]
+	}
+}
