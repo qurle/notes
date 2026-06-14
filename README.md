@@ -37,7 +37,7 @@ import NoteLayout from '@layouts/NoteLayout.astro'
 <NoteLayout>your content</NoteLayout>
 ```
 
-HTML pages are listed and served as-is, no styling applied. Raw and proud.
+HTML pages are listed and served as-is, no styling applied.
 
 ### Frameworks included
 Components run right inside notes: 
@@ -48,7 +48,7 @@ Components run right inside notes:
 ```mdx
 import Counter from '@components/Counter'
 
-# I can count!
+# I can only count to four!
 <Counter client:load />
 ```
 
@@ -76,10 +76,10 @@ npm run dev
 ```
 4. Open link from terminal (usually http://localhost:4321/)
 
-That's it. Replace `src/pages` content with your own notes and you are ready for deploy.
+That's it. Replace `src/pages` content with your own notes and you are ready to deploy.
 
 ### Make it yours
-Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root. No admin panel.
+Completely optional configuration lives in one file — [`notes.settings.jsonc`](https://github.com/qurle/notes/blob/main/notes.settings.jsonc) in the project root.
 
 | Setting | What it does |
 | --- | --- |
@@ -90,7 +90,7 @@ Completely optional configuration lives in one file — [`notes.settings.jsonc`]
 | `indexable` | `false` tags every page `noindex` so search engines skip it — flip to `true` to go public |
 | `footer` | Show / hide the footer and set its links |
 
-**One privacy caveat:** `indexable` only hides you from search — everything in `src/pages/` is still served to anyone who has the link. Keep truly private things out of the repo.
+**One privacy caveat:** `indexable` only hides you from search — everything in `src/pages/` is still served to anyone who has the link. Keep truly private things locally.
 
 If you want to edit styles, welcome to `src/styles/`. Folder page logic lives in `src/pages/[...folder].astro`.
 
