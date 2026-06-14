@@ -39,6 +39,7 @@ const { hideBack, backUrl } = Astro.props
   import { cycleFonts } from '@scripts/actions/fonts'
   import { cycleThemes } from '@scripts/actions/themes'
   import { getByClass } from '@scripts/utils/getElements'
+  import { isTyping } from '@scripts/utils/isTyping'
 
   const fontEl = getByClass('fonts')
   const themeEl = getByClass('theme')
@@ -48,6 +49,8 @@ const { hideBack, backUrl } = Astro.props
   themeEl?.addEventListener('click', cycleThemes)
 
   document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return
+    if (isTyping()) return
     if (e.code === 'KeyB' || e.code === 'Backspace') backEl?.click()
     if (e.code === 'KeyF' && fontEl) cycleFonts()
     if (e.code === 'KeyT' && themeEl) cycleThemes()

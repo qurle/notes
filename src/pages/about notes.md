@@ -11,6 +11,9 @@ Nest folders as deep as your brain likes — the structure follows automatically
 **Keyboardy**\
 Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
 
+**Searchable**\
+Fuzzy-find any note across the whole site, from any folder.
+
 **Free and open source**\
 Grab your own copy [on GitHub](https://github.com/qurle/notes)
 
