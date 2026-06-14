@@ -1,24 +1,16 @@
 # notes.
 
-A simple [Astro](https://astro.build) page storage inspired by [type.baby](https://type.baby).
+![Vercel](https://vercelbadge.vercel.app/api/qurle/notes?style=flat) ![Static Badge](https://img.shields.io/badge/just-files-white?style=flat)
 
-**Simple** — drop a file, get a page. No config required.  
-**Keyboard-friendly** — navigate with arrow keys, go back with backspace.  
-**Scalable** — nest folders in your way, the structure follows automatically.
+Tiny [Astro](https://astro.build) site that turns a folder of files into your personal notes storage. Inspired by [type.baby](https://type.baby).
 
-## Content
+![Look of notes homepage](.github/hero-image.png)
 
-Add `.md`, `.mdx`, `.astro`, or `.html` files to `src/pages/` and organize them into subfolders however you like. The site automatically generates a navigable directory listing for every folder.
+### Drop a file, get a page
+No config, no database, no admin panel. Put a `.md`, `.mdx`, `.astro` or `.html` file into `src/pages/` — and it's published. That's it. That's the whole workflow.
 
-- **Markdown / MDX** — styled automatically, no extra steps
-- **Astro pages** — wrap your content in `NoteLayout` to get the same styling:
-  ```astro
-  ---
-  import NoteLayout from '@layouts/NoteLayout.astro'
-  ---
-  <NoteLayout>your content</NoteLayout>
-  ```
-- **HTML pages** — listed and served as-is, no styling applied
+### Folders are pages too
+Nest your notes however your brain likes. Every folder becomes a navigable listing, generated automatically. Two notes or two hundred — the structure just follows you.
 
 ```
 src/pages/
@@ -42,26 +34,57 @@ src/pages/
         └── coffee.md
 ```
 
-## Run locally
+### Hands on keyboard
+Browse like it's a file manager. Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
 
-1. Install [Node.js](https://nodejs.org) (v22.12.0 or newer)
-2. Download this repository
-3. Open terminal in the project folder and run:
-   ```sh
-   npm install
-   npm run dev
-   ```
-4. Open the link from the terminal (usually [http://localhost:4321](http://localhost:4321))
+### Pick the right style
+Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find the look that feels like home. Your choice is remembered.
 
-## Customization
+![Example of switching font and theme](.github/appearance.png)
 
-- **Styles** — `src/styles/`
-- **Folder page logic** — `src/pages/[...folder].astro`
+### Any content you like
+Markdown and MDX are styled automatically, zero extra steps. Astro pages get the same look — just wrap them in `NoteLayout`:
 
-## License
+```astro
+---
+import NoteLayout from '@layouts/NoteLayout.astro'
+---
+<NoteLayout>your content</NoteLayout>
+```
 
-[GPL-3.0](LICENSE)
+HTML pages are listed and served as-is, no styling applied. Raw and proud.
+
+### Under the hood
+Fronted by [Astro](https://astro.build), deployed on [Vercel](https://vercel.com). Icons by [astro-icon](https://www.astroicon.dev/) with [Material Symbols](https://fonts.google.com/icons).
 
 ---
+### How do I run it locally
+1. Install [Node.js](https://nodejs.org) (cause you need npm)
+2. Download repository
+3. Open terminal and run this
+```bash
+cd <path to folder of notes.>
+npm i
+npm run dev
+```
+4. Open link from terminal (usually http://localhost:4321/)
 
-Like that? Check out [type.baby](https://type.baby) — a zen markdown editor, an insiration for notes.
+**Want to tweak it?** Styles live in `src/styles/`, folder page logic — in `src/pages/[...folder].astro`.
+
+### Make it yours.
+Everything lives in one file — `notes.settings.jsonc` in the project root. No admin panel.
+
+| Setting | What it does |
+| --- | --- |
+| `title` | Your site's name — the browser tab and the title suffix |
+| `description` | Default page description, for meta tags and link previews |
+| `appearance` | Starting `theme` / `font` and whether their switcher buttons show |
+| `indexable` | `false` tags every page `noindex` so search engines skip it — flip to `true` to go public |
+| `footer` | Show / hide the footer and set its links |
+
+**One privacy caveat:** `indexable` only hides you from search — everything in `src/pages/` is still served to anyone who has the link. Keep truly private things out of the repo.
+
+---
+Designed and developed by [qurle](https://qurle.net). Inspired by [type.baby](https://type.baby).
+
+Share bugs and ideas via [issues](https://github.com/qurle/notes/issues). Any dialogs are also welcome at [nick@qurle.net](mailto:nick@qurle.net?subject=notes.).

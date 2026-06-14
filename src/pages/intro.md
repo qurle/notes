@@ -1,20 +1,24 @@
-# notes.
+# Intro to notes.
 
-A simple page storage built with [astro](https://astro.build).
+Welcome to notes, a tiny [Astro](https://astro.build) site that turns a folder of files into pages. You're reading one right now.
 
-It's simple. Drop a file, get a page. No config, no frontmatter required. 
+**Simple**\
+Drop a file, get a page. No config, no database, no frontmatter.
 
-It's keyboard-friendly. Navigate folders and files with arrow keys, go back with backspace. 
+**Keyboardy**\
+Arrow keys move between entries, Backspace takes you back. Mouse is optional, honestly.
 
-It's scalable. Nest folders as deep as you want, the structure follows automatically.
+**Scalable**\
+Nest folders as deep as your brain likes — the structure follows automatically.
 
-It's free and open source. Get your notes at [GitHub](https://github.com/qurle/notes).
+**Free and open source**\
+Grab your own copy [on GitHub > > > > >](https://github.com/qurle/notes)
 
-### some kind of instruction
+### How it works
 
-Drop any `.md`, `.mdx`, `.astro`, or `.html` file into `src/pages/` and it shows up on the site. use subfolders to organize things however makes sense to you — the site builds a navigable directory listing for every folder automatically.
+Drop any `.md` `.mdx` `.astro` or `.html` file into `src/pages/` and it's published. Use subfolders to organize things however makes sense to you — every folder gets a navigable listing, generated on its own.
 
-Markdown and mdx pages are styled out of the box. astro pages need to be wrapped in `NoteLayout`. html pages are served as-is.
+Markdown and MDX are styled out of the box. Astro pages just need a wrap in `NoteLayout`. HTML pages are served as-is — raw and proud.
 
 That's about it.\
-      _- qurle_
+    _- qurle_

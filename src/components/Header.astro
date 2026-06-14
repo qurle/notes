@@ -1,6 +1,7 @@
 ---
 import '@styles/header.sass'
 import { Icon } from 'astro-icon/components'
+import settings from '@settings'
 
 const { hideBack, backUrl } = Astro.props
 ---
@@ -18,12 +19,20 @@ const { hideBack, backUrl } = Astro.props
     </div>
   </div>
   <div class="right">
-    <button class="fonts"
-      ><Icon name="material-symbols:square-outline" />
-    </button>
-    <button class="theme"
-      ><Icon name="material-symbols:circle-outline" />
-    </button>
+    {
+      settings.appearance.font.switch && (
+        <button class="fonts">
+          <Icon name="material-symbols:square-outline" />
+        </button>
+      )
+    }
+    {
+      settings.appearance.theme.switch && (
+        <button class="theme">
+          <Icon name="material-symbols:circle-outline" />
+        </button>
+      )
+    }
   </div>
 </header>
 <script>
@@ -35,12 +44,12 @@ const { hideBack, backUrl } = Astro.props
   const themeEl = getByClass('theme')
   const backEl = getByClass('back')
 
-  fontEl.addEventListener('click', cycleFonts)
-  themeEl.addEventListener('click', cycleThemes)
+  fontEl?.addEventListener('click', cycleFonts)
+  themeEl?.addEventListener('click', cycleThemes)
 
   document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyB' || e.code === 'Backspace') backEl?.click()
-    if (e.code === 'KeyF') cycleFonts()
-    if (e.code === 'KeyT') cycleThemes()
+    if (e.code === 'KeyF' && fontEl) cycleFonts()
+    if (e.code === 'KeyT' && themeEl) cycleThemes()
   })
 </script>
