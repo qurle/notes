@@ -67,7 +67,7 @@ Switch fonts (serif / mono / sans) and themes (light / dark / digital) to find t
 
 ### Get started
 1. Install [Node](https://nodejs.org) (cause you need npm)
-2. Download repository
+2. [Use this repo as a template](https://github.com/new?template_name=notes&template_owner=qurle) and download it
 3. Open terminal and run this
 ```bash
 cd <path to folder of notes.>
