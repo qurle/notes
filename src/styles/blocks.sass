@@ -8,8 +8,11 @@
         flex-direction: column
         flex-grow: 1
 
-        &>*:not(:first-child)
+        &>*:not(:first-child):not(astro-island),
             margin-top: var(--space-l)
+
+        &>astro-island
+            display: block
 
         // Typography
         h1
