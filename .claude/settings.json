@@ -9,7 +9,8 @@
 			"Bash(npm run preview:*)",
 			"Bash(npm run astro:*)",
 			"Bash(npx astro:*)",
-			"Bash(astro:*)"
+			"Bash(astro:*)",
+			"Bash(gh:*)"
 		]
 	}
 }

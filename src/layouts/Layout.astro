@@ -18,6 +18,8 @@ if (title !== defaultTitle)
 const base = Astro.url.pathname.endsWith('/')
   ? Astro.url.pathname
   : Astro.url.pathname + '/'
+
+const origin = `${Astro.url.protocol}//${Astro.url.host}`
 ---
 
 <!doctype html>
@@ -43,10 +45,10 @@ const base = Astro.url.pathname.endsWith('/')
     <meta name="apple-mobile-web-app-status-bar-style" content="#161616" />
 
     <meta property="og:title" content={pageTitle} />
-    <meta property="og:image" content="/og/main.png" />
-    <meta property="vk:image" content="/og/main-vk.png" />
+    <meta property="og:image" content={`${origin}/og/main.png`} />
+    <meta property="vk:image" content={`${origin}/og/main-vk.png`} />
+    <meta name="twitter:image" content={`${origin}/og/main.png`} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/og/main.png" />
 
     <Icons />
 
