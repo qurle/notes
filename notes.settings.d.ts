@@ -23,6 +23,9 @@ declare module '@settings' {
       }
     }
     indexable: boolean
+    scroll: {
+      restore: boolean
+    }
     footer: {
       show: boolean
       content: FooterLink[]
