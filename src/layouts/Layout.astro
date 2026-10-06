@@ -53,6 +53,17 @@ const origin = `${Astro.url.protocol}//${Astro.url.host}`
     <Icons />
 
     <script is:inline>
+      // Restore scroll before paint to avoid visible jumps.
+      if (window.location.pathname) {
+        const key = 'scroll:' + window.location.pathname
+        const saved = Number.parseInt(localStorage.getItem(key) || '', 10)
+        if (!Number.isNaN(saved)) {
+          window.scrollTo(0, saved)
+        }
+      }
+    </script>
+
+    <script is:inline>
       // This thing comes inline to avoid flickering when your
       // theme is not default. Sorry, just saving your eyes!
       function loadMode(mode) {
@@ -78,5 +89,14 @@ const origin = `${Astro.url.protocol}//${Astro.url.host}`
   </head>
   <body class={className}>
     <slot />
+
+    {
+      settings.scroll.restore && (
+        <script>
+          import { initScrollRestore } from '@scripts/utils/scroll'
+          initScrollRestore()
+        </script>
+      )
+    }
   </body>
 </html>
