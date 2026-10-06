@@ -22,6 +22,10 @@
 	},
 	// Show in search engines
 	"indexable": false,
+	// Remember scroll position when returning to a note
+	"scroll": {
+		"restore": true
+	},
 	// Footer settings
 	"footer": {
 		// Show the footer
